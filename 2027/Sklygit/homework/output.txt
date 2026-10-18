@@ -1,0 +1,24 @@
+================ Homework 1 ================
+
+[1] 运行脚本时的系统时间 / system time
+    2026-10-18 15:20:51 CST (星期日)
+
+[2] 最近使用的 10 条命令 / last 10 commands
+ 1. ls -la
+ 2. " vim 最常用的几个
+ 3. i        进入插入模式
+ 4. Esc      回到普通模式
+ 5. :wq      保存并退出
+ 6. git status
+ 7. git add hello.txt
+ 8. git commit -m "Add greeting."
+ 9. git push -u origin feature/hello
+   
+
+[3] 我的笔记字数 / notes statistics
+    笔记文件 / file : notes/lesson1-notes.md
+    单词数 / words  : 263
+    字符数 / chars  : 2222
+    行  数 / lines  : 148
+
+============================================
