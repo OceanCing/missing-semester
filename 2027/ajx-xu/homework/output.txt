@@ -1,0 +1,15 @@
+系统时间:
+2026年 10月 20日 星期二 20:40:53 CST
+历史指令(10):
+cd ..
+mkdir homework
+cd homework
+vim note.sh
+[200~chmod +x homework.sh~
+chmod +x note.sh
+./note.sh
+cd ..
+cd homework
+./note.sh
+笔记字数:
+182 ../notes/lesson1_note.md
