@@ -59,4 +59,18 @@
 
 ### （2）vim介绍
     - vim有三种常用模式：命令模式（回车/ESC），插入模式（a,i,o,A,I,O），尾行模式(:)
-    - 必备按键：:w , :q , :wq（） , :q!(放弃修改并退出)
+    - 必备按键：:w（保存） , :q（退出） , :wq（保存退出） , :q!(放弃修改并退出) ， h j k l(左下上右) ， dd（删除当前行) , yy/p(复制当前行/粘贴) ，u（撤销） ， /word（搜索word）
+    - 基本使用流程：1.vim 文件名，2.i(进入插入模式)，3.Esc（返回普通模式），:wq(保存退出)。
+
+---
+
+## 3.Github
+    - Git:本地版本控制，Github:远程托管与协作
+###  (1)Git介绍
+
+```mermaid
+    graph LR
+    A([工作区]) -- "git add" --> B([暂存区]) -- "git commit -m" --> C([本地仓库]) -- "git push" --> D ([Github 远程仓库])
+```
+    - Git初始配置：git config--global user.name"" ; git config--global user.email "" 。
+    - SSH密钥
