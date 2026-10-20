@@ -1,0 +1,29 @@
+==============================================
+ 培训课第一课作业 · output
+==============================================
+
+----- 1. 运行脚本时的系统时间 -----
+2026-10-21 00:35:15 星期三 (UTC+0800)
+
+----- 2. 最近使用的 10 条命令 -----
+ls -la
+cd ../notes
+cat lecture-01-notes.md
+wc -w lecture-01-notes.md
+git status
+git add 2027/hajsnz
+git commit -m "Add first lesson notes."
+git switch -c 2027/hajsnz
+git remote -v
+grep -rn "TODO" .
+
+----- 3. 笔记的字数 -----
+笔记目录: /c/Users/hajsnz/Documents/deepseek-harness/default-workspace/missing-semester/2027/hajsnz/notes
+笔记文件数: 1
+词数 (words): 1633
+字符数 (characters): 10156
+
+----- 4. 运行环境 -----
+Shell: 5.3.9(1)-release
+工作目录: /tmp
+==============================================
