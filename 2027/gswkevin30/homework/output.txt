@@ -1,0 +1,17 @@
+===== System Time =====
+2026年 10月 21日 星期三 13:28:51 CST
+
+===== Last 10 Commands =====
+curl -l https://github.com
+git clone https://mirror.ghproxy.com/https://github.com/vuejs/vue.git
+sudo apt remove -y docker-engine docker.io containerd runc
+sudo apt update
+sudo apt install ca-certificates curl -y
+sudo install -m 0755 -d /etc/apt/keyrings
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+echo \
+git clone https://github.com/gswkevin30/missing-semester.git
+cd ~/missing-semester
+
+===== Notes Word Count =====
+Characters: 146
