@@ -1,15 +1,15 @@
-系统时间
-2026年 10月 20日 星期二 10:39:16 CST
-10条命令
-git status
-cat test.txt
-git stash pop
-cat test.txt
-git add test.txt
-git commit -m "My second attempt."
-git remote add origin git@github.com:curious-apprentice/git_practice.git
-git push -u origin master
-resolvectl status
-nslookup www.baidu.com
-字数统计
-0 ../notes/lesson1.md
+系统时间:
+2026年 10月 21日 星期三 23:40:34 CST
+10条命令:
+# 进入容器后
+roscore
+docker exec -it my_ros_env bash
+docker start my_ros_env
+docker exec -it my_ros_env bash
+exit
+./task.sh > output.txt
+./task1.sh >output.txt
+cat output.txt
+history -a
+字数统计:
+3083 ../notes/lesson1.md
