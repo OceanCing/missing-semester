@@ -1,6 +1,6 @@
 ===== Homework Output =====
-Script path : /home/egonite/Documents/deepseek-harness/default-workspace/src/2027/egoniteqwq/homework
-System time : 2026-10-22 17:27:35 CST (+0800)
+Script path : /home/egonite/Documents/deepseek-harness/default-workspace/missing-semester/2027/egoniteqwq/homework
+System time : 2026-10-22 17:29:44 CST (+0800)
 
 ----- Last 10 commands -----
     2  cd missing-semester
@@ -15,6 +15,6 @@ System time : 2026-10-22 17:27:35 CST (+0800)
    11  git push origin egoniteqwq
 
 ----- Notes word count -----
-Notes directory : /home/egonite/Documents/deepseek-harness/default-workspace/src/2027/egoniteqwq/homework/../notes
+Notes directory : /home/egonite/Documents/deepseek-harness/default-workspace/missing-semester/2027/egoniteqwq/homework/../notes
 Characters (without whitespace): 5912
 Words (wc -w): 1274
