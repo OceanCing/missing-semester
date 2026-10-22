@@ -1,0 +1,14 @@
+===== System Time =====
+2026-10-22 21:26:19 CST
+
+===== Recent Shell Commands =====
+history
+cat > 2027/MUN6128/notes/training_notes.md <<'EOF'
+echo "Hello, Linux"
+date
+whoami
+history
+pwd
+ls ~/coursework/missing-semester/2027/MUN6128/notes/
+cat ~/coursework/missing-semester/2027/MUN6128/notes/training_notes.md
+cd ~/coursework/missing-semester
