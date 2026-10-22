@@ -1,0 +1,22 @@
+Lesson 1 homework output
+=========================
+
+System time:
+2026-10-22 13:39:52    
+
+Last 10 commands:
+ls
+cd 2027/jiDAMNguo/notes
+ls -l
+wc -m lesson1-notes.md
+cd ../homework
+ls -l
+chmod +x lesson1.sh
+cat lesson1.sh
+cd ..
+ls
+
+Notes word count:
+file: lesson1-notes.md
+characters (wc -m): 18762
+words (wc -w): 1445
