@@ -1,0 +1,17 @@
+System time:
+2026年 10月 22日 星期四 12:39:43 CST
+
+Last 10 commands:
+WEBKIT_DISABLE_DMABUF_RENDERER=0
+lsb_release -a
+uname -m
+sudo apt install ./chatgpt_amd64.deb
+cd ~/Downloads
+ls ~
+find ~ -type f -name "*chatgpt*.deb" 2>/dev/null
+file ~/下载/chatgpt_amd64.deb
+sudo apt install ~/下载/chatgpt_amd64.deb
+chatgpt
+
+Word count of lesson1-notes.md:
+332
