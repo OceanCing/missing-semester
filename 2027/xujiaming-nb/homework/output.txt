@@ -1,0 +1,17 @@
+运行脚本时的系统时间
+Wed Oct 21 14:52:02     2026
+
+最近使用的10条命令
+bash 2027/xujiaming-nb/homework/task.sh
+exit
+bash 2027/xujiaming-nb/homework/task.sh
+cd missing-semester
+bash 2027/xujiaming-nb/homework/task.sh
+exut
+exit
+git status
+cd missing-semester
+history -w
+
+笔记字数
+1473
