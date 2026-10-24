@@ -1,0 +1,415 @@
+{
+  "main": {
+    "id": "e42504352849c10d",
+    "type": "split",
+    "children": [
+      {
+        "id": "7c01f25ffc41a690",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "c4ed7b8edfff79a7",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "单片机/FreeRTOS/RTOS调试.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "RTOS调试"
+            }
+          },
+          {
+            "id": "49013f632d001ef8",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "CCS配置GPIO.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "CCS配置GPIO"
+            }
+          },
+          {
+            "id": "b5469e8b2d6578b4",
+            "type": "leaf",
+            "state": {
+              "type": "release-notes",
+              "state": {
+                "currentVersion": "1.13.4"
+              },
+              "icon": "lucide-book-up",
+              "title": "版本说明 1.13.4"
+            }
+          },
+          {
+            "id": "866186d578b479b8",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "仿真学习.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "仿真学习"
+            }
+          },
+          {
+            "id": "2b2f6f03a5f037b6",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "freertos概览.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "freertos概览"
+            }
+          },
+          {
+            "id": "58156f19e88329e0",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "MATLAB/MATLAB基础使用.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "MATLAB基础使用"
+            }
+          },
+          {
+            "id": "d6715a280b5bf5f8",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "MATLAB/MATLAB基础使用.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "MATLAB基础使用"
+            }
+          },
+          {
+            "id": "f2f89ca74f29ede0",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "MATLAB/控制数学.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "控制数学"
+            }
+          },
+          {
+            "id": "e3da3ab89c9e32fd",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "MATLAB/控制数学.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "控制数学"
+            }
+          },
+          {
+            "id": "f7fc8ef801906c66",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "单片机/smt32/f103/通信/通信.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "通信"
+            }
+          },
+          {
+            "id": "cfd3345e57aff381",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "单片机/esp32/关键字.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "关键字"
+            }
+          },
+          {
+            "id": "a25e5f3862399f16",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "查看/智能小A机械硬件设计要求.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "智能小A机械硬件设计要求"
+            }
+          },
+          {
+            "id": "0bfb40697032da37",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "单片机/FreeRTOS/task/队列.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "队列"
+            }
+          }
+        ],
+        "currentTab": 8
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "b6a004a4742bb58c",
+    "type": "split",
+    "children": [
+      {
+        "id": "d8a9402bc9409a7a",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "28fbfbe27a7dd408",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-folder-closed",
+              "title": "文件列表"
+            }
+          },
+          {
+            "id": "412af73a1b4777eb",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "搜索"
+            }
+          },
+          {
+            "id": "0c4f3e56d53403e5",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "书签"
+            }
+          },
+          {
+            "id": "4589addd942e937e",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "新标签页"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 200
+  },
+  "right": {
+    "id": "7813274ccaa3bc26",
+    "type": "split",
+    "children": [
+      {
+        "id": "0e962a782e9f278d",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "b8e12bbe37f334cb",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "单片机/FreeRTOS/事件/事件组.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "事件组 的反向链接列表"
+            }
+          },
+          {
+            "id": "0c674bca6df838f1",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "欢迎.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "欢迎 的出链列表"
+            }
+          },
+          {
+            "id": "49c0462a015c50db",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "标签"
+            }
+          },
+          {
+            "id": "6cfc3726df8e719f",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "添加笔记属性"
+            }
+          },
+          {
+            "id": "c36cf4043954834d",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "欢迎.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "欢迎 的大纲"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 200,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "bases:新建数据库": false,
+      "switcher:打开快速切换": false,
+      "graph:查看关系图谱": false,
+      "canvas:新建白板": false,
+      "daily-notes:打开/创建今天的日记": false,
+      "templates:插入模板": false,
+      "command-palette:打开命令面板": false
+    }
+  },
+  "active": "28fbfbe27a7dd408",
+  "lastOpenFiles": [
+    "MATLAB 1/控制数学.md",
+    "MATLAB 1/simulink.md",
+    "MATLAB 1/MATLAB基础使用.md",
+    "MATLAB 1",
+    "MATLAB/控制数学.md",
+    "MATLAB/MATLAB基础使用.md",
+    "未命名.md",
+    "MATLAB/simulink.md",
+    "仿真学习.md",
+    "附件/Pasted image 20260817125135.png",
+    "matlab脚本.md",
+    "MATLAB",
+    "freertos概览.md",
+    "控制",
+    "CCS配置GPIO.md",
+    "心得.md",
+    "未命名 3.base",
+    "未命名 2.base",
+    "未命名 1.base",
+    "未命名.base",
+    "附件/Pasted image 20260727164342.png",
+    "单片机/FreeRTOS/RTOS调试.md",
+    "单片机/TI",
+    "单片机/smt32/F407天空星/引脚.md",
+    "附件/Pasted image 20260512210156.png",
+    "单片机/smt32/f103/通信/通信.md",
+    "查看/智能小A机械硬件设计要求.md",
+    "单片机/FreeRTOS/task/队列.md",
+    "附件/Pasted image 20260512210042.png",
+    "单片机/esp32/事件/事件组.md",
+    "单片机/esp32/事件/事件.md",
+    "单片机/FreeRTOS/task/任务通知.md",
+    "单片机/esp32/NVS.md",
+    "查看/智能小A业务逻辑.md",
+    "查看/智能小APRD文档.md",
+    "查看/AI 陪伴与具身智能机器人市场商业分析报告.md",
+    "查看/智能小A业务逻辑.md.txt",
+    "查看/智能小A机械硬件设计要求.md.txt",
+    "2026-06-17.md",
+    "单片机/FreeRTOS/task/任务状态.md",
+    "附件/Pasted image 20260613151318.png",
+    "附件/Pasted image 20260613151246.png",
+    "附件/Pasted image 20260613150613.png",
+    "附件/Pasted image 20260121192541.png",
+    "附件/Pasted image 20260525210633.png",
+    "附件/Pasted image 20260525142636.png",
+    "未命名.canvas"
+  ]
+}

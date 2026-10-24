@@ -2,3 +2,9 @@
 .bundle/
 _site/
 .jekyll-metadata
+
+# CLion / JetBrains IDE
+.idea/
+*.iml
+cmake-build-debug/
+cmake-build-release/
