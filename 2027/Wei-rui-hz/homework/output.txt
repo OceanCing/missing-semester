@@ -1,0 +1,15 @@
+===== 系统时间 =====
+2026-10-22 15:46:47
+===== 最近10条命令 =====
+mkdir work_1
+cd ~/work_1
+cd ~/DX_practice/work_1
+touch note_1
+rm note_1
+touch note_1.md
+cd ~/文档/Trae-CN/default/missing-semester/2027/Wei-rui-hz/notes
+vim note_1.md
+cd ~/文档/Trae-CN/default/missing-semester/2027/Wei-rui-hz/notes
+vim note_1
+===== 笔记字数 =====
+3193
