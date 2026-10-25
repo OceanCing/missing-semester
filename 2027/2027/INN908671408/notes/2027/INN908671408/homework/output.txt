@@ -1,0 +1,11 @@
+=== 最近10条命令 ===
+    1  git init
+    2  git remote add origin git@github.com:INN908671408/missing-semester.git
+    3  git fetch origin
+    4  git checkout -b INN908671408 origin/INN908671408
+    5  cd 2027/INN908671408/homework
+    6  bash task.sh
+    7  cat output.txt
+    8  cd ../..
+    9  git add 2027/INN908671408/
+   10  git commit -m "Add training notes and homework script."
