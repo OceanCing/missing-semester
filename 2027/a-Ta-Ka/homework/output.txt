@@ -1,0 +1,12 @@
+2026年 10月 20日 星期二 01:22:36 CST
+git branch
+> ~/.bash_history
+ls
+owd
+pwd
+cd ~/git/missing-semester/2027/a-Ta-Ka/homework/
+ls
+cat output.txt 
+vim output.txt 
+exit
+7760
