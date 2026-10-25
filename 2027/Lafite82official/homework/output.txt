@@ -1,0 +1,15 @@
+系统时间：
+Tue Oct 20 18:34:56 CST 2026
+最近使用的10条命令：
+cd project/
+ls
+git clone git@github.com:Lafite82official/missing-semester.git
+ls
+co missing-semester/
+cd missing-semester/
+ls
+cd 2027/
+ls
+code .
+笔记字数：
+2297 ../notes/RMNote-1stClassV2.md
