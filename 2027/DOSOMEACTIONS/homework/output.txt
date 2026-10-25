@@ -1,0 +1,30 @@
+==========================================
+培训课第一课作业 · 运行结果
+==========================================
+
+【1】运行脚本时的系统时间
+------------------------------------------
+2026-10-18 17:00:27 CST (星期7)
+
+【2】最近使用的 10 条命令
+------------------------------------------
+ 1. # ③ 注销 → 重新登录
+ 2. cp ~/Applications/D*myharness/install-vim-pretty.sh ~/dsh-setup/
+ 3. bash ~/dsh-setup/install-vim-pretty.sh
+ 4. vim ~/rm-practice/你好.sh
+ 5. cp ~/Applications/D*myharness/install-vim-plugins.sh ~/dsh-setup/
+ 6. bash ~/dsh-setup/install-vim-plugins.sh
+ 7. vim
+ 8. vim ~/rm-practice/你好.sh
+ 9. dsh web
+10. codex
+
+【3】笔记字数
+------------------------------------------
+文件路径: notes/lesson1-linux-vim-shell-git.md
+字符数:   2568
+行数:     179
+
+==========================================
+输出结束
+==========================================
