@@ -34,7 +34,7 @@ sudo mount /dev/分区名 /mnt   # 手动挂载一个分区到/mnt
 sudo umount /mnt  #用完卸载
 ```
 上了课才知道
-| '/mnt' | 管理员手动临时挂载 |
+| `/mnt` | 管理员手动临时挂载 |
 
 ## 二、Shell
 
