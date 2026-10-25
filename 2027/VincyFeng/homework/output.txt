@@ -1,0 +1,13 @@
+Current time: 2026-10-21 22:45:12
+Command history top 10:
+  496  ls
+  497  ls -la
+  498  sudo chmod 755 homework01.sh
+  499  ls -la
+  500  ./homework01.sh
+  501  pwd
+  502  ./homework01.sh
+  503  ls -a
+  504  cat output.txt
+  505  ./homework01.sh
+Note count: 1456
