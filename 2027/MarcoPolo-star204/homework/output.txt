@@ -1,0 +1,12 @@
+2026年 10月 21日 星期三 20:31:11 CST
+git clone https://github.com/MarcoPolo-star204/missing-semester.git
+cd missing-semester/2027/MarcoPolo-star204/homework
+chmod +x task.sh
+./task.sh
+nano task.sh
+./task.sh
+nano task.sh
+./task.sh
+nano task.sh
+task.sh
+208 ../notes/lesson1.md
