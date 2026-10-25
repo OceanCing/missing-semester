@@ -1,0 +1,17 @@
+=====当前系统时间====
+Tue Oct 20 23:46:13 CST 2026
+
+=====最近10条命令====
+: 1792510848:0;chmod +x task.sh
+: 1792510861:0;./task.sh
+: 1792510905:0;nano task.sh
+: 1792510945:0;chmod +x task.sh
+: 1792510948:0;./task.sh
+: 1792510975:0;nano task.sh
+: 1792510998:0;chmod +x task.sh
+: 1792511000:0;./task.sh
+: 1792511073:0;ls
+: 1792511173:0;./task.sh > output.txt
+
+====笔记文件字数====
+41 ../notes/linux_git_notes.md
