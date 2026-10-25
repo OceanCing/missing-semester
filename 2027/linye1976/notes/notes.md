@@ -30,5 +30,5 @@
  
 ##5.Git与GitHub
 -Git:本地版本控制；GitHub:远程托管与协作
--`git add` :本次提交的内容清单；`git commit`:已记录的提交历史；`git push`:远程保存的提交历史
+-`git add` :本次提交的内容清单；`git commit`:已记录的提交历史；`git push`gugu:远程保存的提交历史
 -分支让同一仓库的开发互不打扰，提交点记录每一步修改
