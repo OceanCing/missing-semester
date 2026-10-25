@@ -1,0 +1,16 @@
+System time: 2026-10-18 15:33:45
+
+Last 10 commands:
+sudo docker rm 716c563aaffd 3e8be067ae85  c43de23fc916 36faf153c200  c2ade11bd998  743a651a00c8 
+sudo docker ps -a
+sudo docker ps 
+sudo docker ps -a
+sudo docker rm 20.04Enviroment
+sudo docker ps -a
+sudo docker ps 
+code
+sudo docker ps -a --size
+sudo docker exec -it ubuntu20 bash
+
+Note word count:
+160
