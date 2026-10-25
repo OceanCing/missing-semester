@@ -1,0 +1,86 @@
+<h1 align="center">Missing Semester DynamicX 第二课 </h1>
+
+
+### 一、程序编译的基本流程
+
+```text
+文本 ——> 预处理器(cpp) ——> 编译器(ccl) ——> 汇编器(as) ——> 链接器(ld) ——> 二进制(计算机语言) 
+```
+```
+进入链接查看流程图片
+https://pic1.zhimg.com/v2-b9e8babf753b1691039458592667121a_1440w.jpg
+```
+#### 预处理阶段 
+命令：g++ -E main.cpp -o main.i
+
+```
+1、预处理器（cpp）将所有的#define删除，并且展开所有的宏定义。
+2、处理所有的条件预编译指令，比如#if、#ifdef、#elif、#else、#endif等。
+3、处理#include预编译指令，将被包含的文件直接插入到预编译指令的位置。
+4、删除所有的注释。
+5、添加行号和文件标识，以便编译时产生调试用的行号及编译错误警告行号。
+6、保留所有的#pragma编译器指令，因为编译器需要使用它们。
+7、使用gcc -E hello.c -o hello.i命令来进行预处理， 预处理得到的另一个程序通常是以.i作为文件扩展名。
+```
+#### 编译阶段
+命令：g++ -S main.i -o main.s
+
+```
+编译器（ccl）将预处理完的文本文件hello.i进行一系列的词法分析、语法分析、语义分析和优化，翻译成文本文件hello.s，它包含一个汇编语言程序。
+编译过程：扫描（词法分析）、语法分析、语义分析、源代码优化、代码生成、目标代码优化。
+```
+#### 汇编阶段
+命令：g++ -c main.s -o main.o
+
+```
+汇编器（as）将hello.s翻译成机器语言指令，把这些指令打包成一种叫做可重定位目标程序的格式，并将结果保存在目标文件hello.o中，hello.o是一个二进制文件。
+  ```
+#### 链接阶段
+命令：g++ main.o math.o -o app
+
+```
+hello程序调用了printf函数，它存在于一个名为printf.o的单独的预编译好了的目标文件中，而这个文件必须以某种方式合并到我们的hello.o程序中。连接器（ld）就负责处理这种合并。结果就得到了hello文件，它是一个可执行目标文件（或者称为可执行文件），可以被加载到内存中，由系统执行。（链接程序运行需要的一大堆目标文件，以及所依赖的其它库文件，最后生成可执行文件）。
+```
+### 二、Makefile、Cmake与catkin工作空间
+
+```
+
+- Makefile像是一本自动编译说明书，他告诉make工具那些需要编译、编译顺序是什么、需要何种命令
+- Makefile的编写能让人们在每次修改好代码后，敲一次命令就能够得到目标程序(只是帮人门写好需要去哪里运行程序，需要手动触发命令，不具备后台监控文件变化并自动编译的过程)
+- make 会检查文件时间戳，只重新编译改动的部分
+- Cmake是一个跨平台工具(综合不同文件编译)，通过写MakefileLists.txt文件，自动生成适配不同操作系统的Makefile文件
+- catkin工作空间 ———— devel(开发空间)：开发过程中可执行的文件和库，也是ROS版的Cmake
+```
+
+### 三、package功能包
+- 代码
+
+```
+cd ~/catkin_ws/src
+catkinzz_create_pkg test_pkg std_msgs rospy roscpp
+//生成一个名为test_pkg的包，并声明依赖消息、python、C++三套接口
+```
+- 执行结构
+```
+test_pkg/
+|————> CMakeLists.txt
+|————> package.xml ##包叙述、依赖声明
+|————> src/  ##C++源码
+|————> include/  ##头文件
+```
+- package功能包
+
+<div style="overflow-x:auto;while-space:nowrap;"> 
+
+|名称|功能|
+|:---:|:---:|
+|CmakeLists.txt|package的编译规则(必须) |
+|package.xml|package的描述信息(必须)|
+|src/|源代码文件|
+|include/|C++头文件|
+|scripts/|可执行脚本|
+|msg/|自定义消息|
+|srv/|自定义服务|
+|models/|3D模型文件|
+|launch|launch文件|
+</div>
