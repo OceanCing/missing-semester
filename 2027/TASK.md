@@ -12,3 +12,13 @@
 9. **注意：即使已经开了PR也是可以修改PR的标题、描述、PR分支等等信息与内容，以及你的新提交会自动更新到PR，所以不要自己Close PR，一定要正确处理PR的不规范以及Conflict，发现通过Close PR再重新PR的方法来规避Conflict的会对本节课作业扣分**
 
 ## 仓库地址：https://github.com/OceanCing/missing-semester
+
+# 培训课第二课作业要求
+
+1. 阅读以下补充资料：
+	1. https://zhuanlan.zhihu.com/p/476697014
+	2. https://www.runoob.com/cmake/cmake-basic.html
+	3. https://www.mihaileric.com/The-Emperor-Has-No-Clothes/
+	4. https://wiki.ros.org/catkin/Tutorials
+2. 在文件夹notes中里面创建一个新的.md文档，命名为 cmake_study.md，用规范的 markdown 语法记录cmake、catkin和上面三篇补充资料的学习笔记。欢迎大家在里面记录使用大模型提升自己对这两个开发工具认识和理解的交互过程和思路，以及自己对用大模型帮助学习这一课题的思考。
+3. 注意：你不应该直接用ai生成此笔记！我们希望大家保留自己的思考，记录真实的学习过程。
