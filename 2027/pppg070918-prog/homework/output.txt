@@ -1,0 +1,17 @@
+系统时间：2026-10-21 00:13:52 CST (+0800)
+
+最近使用的 10 条命令：
+curl -I --max-time 3 -x https://127.0.0.1:7897 https://www.baidu.com
+curl -I --max-time 3 -x https://127.0.0.1:7890 https://www.baidu.com
+cd ~/projects/missing-semester
+vim 2027/pppg070918-prog/notes/lesson-one.md
+cd "/home/pg/Documents/CProjects/" && mkdir -p build && gcc -g3 -Wall -Wextra -std=c17 zuoye.c -o build/zuoye && "/home/pg/Documents/CProjects/"/build/zuoye
+gcc -g3 -Wall -Wextra -std=c17 zuoye.c -o build/zuoye -lm
+gcc -g3 -Wall -Wextra -std=c17 zuoye.c -o build/zuoye -lm
+cd "/home/pg/Documents/CProjects/" && mkdir -p build && gcc -g3 -Wall -Wextra -std=c17 zuoye.c -o build/zuoye && "/home/pg/Documents/CProjects/"/build/zuoye
+gcc -g3 -Wall -Wextra -std=c17 zuoye.c -o build/zuoye -lm
+cd "/home/pg/Documents/CProjects/" && mkdir -p build && gcc -g3 -Wall -Wextra -std=c17 zuoye.c -o build/zuoye -lm && "/home/pg/Documents/CProjects/"/build/zuoye
+
+笔记字数（按字符计，含空白）：7524
+笔记字数（按字符计，不含空白）：5968
+笔记词数（按空白分隔）：1245
