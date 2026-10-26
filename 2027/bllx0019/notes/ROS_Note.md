@@ -46,14 +46,122 @@ ROS Noetic（ROS1家族）的运行模型
 
 docker_file长这样：
 ```docker
+# Utilisation de l'image officielle ROS Noetic
+FROM osrf/ros:noetic-desktop-full
 
+# Installation de quelques outils utiles + support GUI
+RUN apt-get update && apt-get install -y \
+    python3-rosdep \
+    python3-rosinstall \
+    python3-rosinstall-generator \
+    python3-wstool \
+    build-essential \
+    nano \
+    git \
+    tmux \
+    wget \
+    curl \
+    iputils-ping \
+    net-tools \
+    psmisc \
+    # Librairies pour le support graphique
+    libgl1-mesa-glx \
+    libgl1-mesa-dri \
+    mesa-utils \
+    x11-apps \
+    # Outils ROS GUI
+    ros-noetic-rqt \
+    ros-noetic-rqt-common-plugins \
+    ros-noetic-rviz \
+    # ROS controllers
+    ros-noetic-position-controllers \
+    ros-noetic-effort-controllers \
+    ros-noetic-joint-state-controller \
+    # ROS simulator packages
+    ros-noetic-husky-simulator \
+    ros-noetic-husky-desktop \
+    && rm -rf /var/lib/apt/lists/*
+
+# Initialisation de rosdep
+RUN rosdep update
+
+# Création d'un utilisateur non-root
+ARG USERNAME=rosuser
+ARG USER_UID=1000
+ARG USER_GID=$USER_UID
+
+RUN groupadd --gid $USER_GID $USERNAME \
+    && useradd --uid $USER_UID --gid $USER_GID -m $USERNAME \
+    && apt-get update \
+    && apt-get install -y sudo \
+    && echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME \
+    && chmod 0440 /etc/sudoers.d/$USERNAME \
+    && rm -rf /var/lib/apt/lists/*
+
+# Passer à l'utilisateur non-root
+USER $USERNAME
+ENV HOME=/home/$USERNAME
+
+# Création d'un workspace catkin
+RUN mkdir -p $HOME/catkin_ws/src && \
+    cd $HOME/catkin_ws && \
+    /bin/bash -c "source /opt/ros/noetic/setup.bash && catkin_make"
+
+# Configuration du shell pour charger ROS automatiquement
+RUN echo "source /opt/ros/noetic/setup.bash" >> $HOME/.bashrc && \
+    echo "source $HOME/catkin_ws/devel/setup.bash" >> $HOME/.bashrc && \
+    echo 'export PS1="\[\033[01;36m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ "' >> $HOME/.bashrc && \
+    echo "export HUSKY_LMS1XX_ENABLED=1" >> $HOME/.bashrc
+
+# Variables d'environnement pour le support GUI
+ENV QT_X11_NO_MITSHM=1
+ENV LIBGL_ALWAYS_INDIRECT=0
+
+WORKDIR $HOME
 ```
 
-为了方便，还写了一个ros1.sh的一键启动脚本，长这样：
+为了方便，还做了一个ros1.sh的一键启动脚本，长这样：
 ```bash
+#!/usr/bin/env bash
+# ros1-multi.sh —— 多终端 ROS Noetic Docker 管理脚本
+set -euo pipefail
 
+IMAGE="${ROS_IMAGE:-osrf/ros:noetic-desktop-full}"
+WS="${ROS_WS:-$HOME/catkin_ws}"
+NAME="${ROS_CONTAINER:-ros1}"
+
+# ... (前置检查和GUI授权部分与你的脚本完全相同，此处省略以节省篇幅) ...
+
+# 检查容器是否已在运行
+if [ "$(docker ps -q -f name="^/${NAME}$")" ]; then
+    # 容器已在运行，直接 exec 进入新终端
+    echo "容器 ${NAME} 已在运行，正在创建新终端..."
+    exec docker exec -it "$NAME" bash -c '
+        [[ -f /root/catkin_ws/devel/setup.bash ]] && source /root/catkin_ws/devel/setup.bash
+        exec bash
+    '
+else
+    # 容器未运行，检查是否存在已停止的同名容器
+    if [ "$(docker ps -aq -f name="^/${NAME}$")" ]; then
+        echo "发现已停止的容器 ${NAME}，正在启动..."
+        docker start "$NAME" >/dev/null
+    else
+        # 不存在则创建新容器（注意：去掉了 --rm）
+        echo "首次创建容器 ${NAME}..."
+        # ... (此处组装 COMMON_ARGS 时，务必移除 --rm 参数) ...
+        docker run -dit \ # 使用 -dit 让容器在后台常驻
+          --name "$NAME" \
+          "${COMMON_ARGS[@]}" \
+          "$IMAGE" bash
+    fi
+    # 启动后，exec 进入第一个终端
+    exec docker exec -it "$NAME" bash -c '
+        [[ -f /root/catkin_ws/devel/setup.bash ]] && source /root/catkin_ws/devel/setup.bash
+        exec bash
+    '
+fi
 ```
-但是由于这两样以及ROS Noetic的docker环境都是由ClaudeCode+ds v3配置的，具体聊天记录早已归档且过于久远，已不可寻
+但是由于这两样以及ROS Noetic的docker环境都是由ClaudeCode+ds v3辅助配置的，具体对话记录早已归档且过于久远，已不可寻
 
 ## ROS 的核心概念
 
