@@ -1,0 +1,17 @@
+Current system time:
+2026年 10月 19日 星期一 19:57:40 CST
+
+Last 10 commands:
+docker run -it --name ros_noetic --net=host --env="DISPLAY=$DISPLAY" --env="QT_X11_NO_MITSHM=1" -v /tmp/.X11-unix:/tmp/.X11-unix:rw osrf/ros:noetic-desktop-full bash
+ls
+sudo passwd demo
+su
+cat /etc/passwd
+sudo apt install ./WeChatLinux_x86_64.deb
+cd Downloads
+sudo apt install '/home/c/下载/WeChatLinux_x86_64.deb' 
+dirname /home/c/
+basename /home/c/
+
+Word count of notes:
+58
