@@ -101,8 +101,15 @@ catkin_ws/
 #### 启动和退出容器
 
 ```` bash
-docker start -ai ros1_learn
+docker start -ai ros1_docker
 exit
+
+ros1_docker            # 没跑就启动，然后进入容器里的 shell（已 source ROS 环境）
+ros1_docker -d         # 只启动，不进 shell
+ros1_docker -s         # 停止
+ros1_docker -r         # 重启
+ros1_docker --status   # 看状态
+ros1_docker roscore    # 直接在容器里执行命令
 ````
 
 #### 新建一个容器挂载在目录上
