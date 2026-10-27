@@ -1,0 +1,11 @@
+Tue Oct 27 09:16:17 AM CST 2026
+ros2 launch fishbot_description display_model.launch.py
+cd ~/chapt6/chapt6_ws
+colcon build
+source install/setup.bash
+ros2 launch fishbot_description display_robot.launch.py
+sudo apt install ./Clash.Verge_2.5.8_amd64.deb
+ls -l Clash.Verge_2.5.8_amd64.deb
+find ~ -name "Clash.Verge*.deb" 2>/dev/null
+sudo apt install /home/zyf/Downloads/Clash.Verge_2.5.8_amd64.deb
+clash-verge
