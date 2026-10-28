@@ -1,0 +1,17 @@
+===系统当前时间是===
+2026年 10月 20日 星期二 11:41:32 CST
+
+===最近使用的10条命令===
+nano notes/cul_class_first.md
+ls
+cd notes
+ls
+cat cul_class_first.md
+nano cul_class_first.md
+vim cul_class_first.md
+sudo apt update
+sudo apt install vim
+vim cul_class_first.md
+
+===笔记字数统计===
+1600 notes/cul_fir.md
