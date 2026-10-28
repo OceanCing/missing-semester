@@ -1,0 +1,18 @@
+----system time-----
+2026-10-20 18:59:07
+
+--ten command recently---
+cd missing-semester/
+ls
+cd 2027
+la
+cd sam0213
+ls
+cd homework/
+ls
+cd
+vim /etc/vim/vimrc
+
+--notes---
+word count: 219
+char count: 1594
