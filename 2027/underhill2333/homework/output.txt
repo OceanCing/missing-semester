@@ -1,0 +1,12 @@
+2026年 10月 18日 星期日 20:28:54 CST
+cd ~
+cd homeworkCode/
+cd missing-semester/
+cd 2027/
+cd underhill2333/
+ll
+cd homework/
+ll
+cat output.txt 
+exit
+1515 ../notes/firstclass.md
