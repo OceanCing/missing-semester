@@ -1,0 +1,23 @@
+i:插入模式
+esc:退出插入模式返回普通模式
+‘:’:普通模式输入英文冒号进入命令模式
+
+:/word xxx  :find word
+:wq         :save and exit
+dd          :delete a line
+yy/p        :copy/paste
+yy/p        :copy/paste
+u           :撤销操作
+hjkl        :move left/down/up/right
+
+this is a line to be copied.
+
+this is a line pasted:
+this is a line to be copied.
+
+this is some words to find.
+a word 
+another word
+
+more operation can be find in:https://quickref.me/vim
+一个B站视频：【【Vim命令全解】新人如何入坑？教你自定义快捷键快速编译运行程序，并定位编译出错点-哔哩哔哩】 https://b23.tv/7BcYKIo

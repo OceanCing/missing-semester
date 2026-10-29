@@ -1,0 +1,15 @@
+System Current Time:
+2026年 10月 18日 星期日 11:53:54 CST
+last 10 commands:
+ 1999  cat output.txt 
+ 2000  cd ~/DX2027/missing-semester/2027/DJdarkstorm1/homework
+ 2001  ./script.sh 
+ 2002  history |tail -n 10
+ 2003  source ./script.sh 
+ 2004  cat output.txt 
+ 2005  source ./script1.0.sh 
+ 2006  history |tail -n 10
+ 2007  vim tip.txt
+ 2008  source ./script1.0.sh 
+num of words of note:
+300 ../notes/lesson1_note.md

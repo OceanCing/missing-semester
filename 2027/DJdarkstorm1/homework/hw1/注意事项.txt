@@ -1,0 +1,3 @@
+script.sh 是从~/.bash_histroy里读取10条数据，与当前终端的数据不同步
+script1.0.sh 直接./script.sh运行 是非交互式脚本无法读取终端的历史命令
+            只能source ./script.sh运行 才能读取当前终端历史命令
