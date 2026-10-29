@@ -1,0 +1,17 @@
+=== 运行时的系统时间 ===
+2026年 10月 18日 星期日 17:24:18 CST
+
+=== 最近 10 条命令 ===
+cd 2027/D-qwe/homework
+exit
+ls
+pwd
+echo "hello world"
+history -w
+ls
+pwd
+echo "hello world"
+history -w
+
+=== 笔记的字数 ===
+3250 ../notes/lecture1.md
