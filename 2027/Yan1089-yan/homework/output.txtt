@@ -1,0 +1,12 @@
+2026年 10月 22日 星期四 09:24:04 CST
+cd missing-semester
+cd 2027
+cd Yan1089-yan
+cd note
+cd notes
+mkdir note
+cd note
+sudo su
+code .
+sudo su
+215 ../note/notes.md

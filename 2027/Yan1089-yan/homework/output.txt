@@ -1,0 +1,12 @@
+2026年 10月 22日 星期四 09:27:41 CST
+   54  cd ..
+   55  nano homework/abc.sh
+   56  cd homework
+   57  ./abc.sh
+   58  cat output.txt
+   59  nano abc.sh
+   60  cat output.txt
+   61  nano abc.sh
+   62  cat output.txt
+   63  source abc.sh
+215 ../note/notes.md
