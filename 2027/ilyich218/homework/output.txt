@@ -1,0 +1,59 @@
+=== 系统时间 ===
+Tue Oct 20 16:36:45     2026
+
+=== 最近使用的 10 条命令 ===
+   16  cd /d/Users/Max/Documents/missing-semester/2027/ilyich218/homework
+   17  cat > hw1.sh << 'EOF'
+#!/bin/bash
+# hw1.sh - 第一课作业
+
+cd "$(dirname "$0")" || exit 1
+
+{
+  echo "=== 系统时间 ==="
+  date
+
+  echo
+  echo "=== 最近使用的 10 条命令 ==="
+  history 10
+
+  echo
+  echo "=== 笔记字数 ==="
+  wc -m ../notes/lesson1-linux-vim-git.md
+} > output.txt
+
+echo "已生成 output.txt"
+EOF
+
+   18  cat hw1.sh
+   19  [200~chmod +x hw1.sh
+   20  source ./hw1.sh
+   21  cat output.txt~
+   22  cd /d/Users/Max/Documents/missing-semester/2027/ilyich218/homework
+   23  cat > hw1.sh << 'EOF'
+#!/bin/bash
+# hw1.sh - 第一课作业
+
+cd "$(dirname "${BASH_SOURCE[0]}")" || exit 1
+
+{
+  echo "=== 系统时间 ==="
+  date
+
+  echo
+  echo "=== 最近使用的 10 条命令 ==="
+  history 10
+
+  echo
+  echo "=== 笔记字数 ==="
+  wc -m ../notes/lesson1-linux-vim-git.md
+} > output.txt
+
+echo "已生成 output.txt"
+EOF
+
+   24  chmod +x hw1.sh
+   25  source ./hw1.sh
+
+=== 笔记字数 ===
+1101 ../notes/lesson1-linux-vim-git.md
