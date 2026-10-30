@@ -1,0 +1,15 @@
+当前系统时间:
+2026年 10月 20日 星期二 15:44:51 CST
+最近的10条命令:
+  490  chmod -x homework1.sh 
+  491  bash homework1.sh 
+  492  bash homework1.sh 
+  493  chmode -x homework1.sh 
+  494  chmod -x homework1.sh 
+  495  bash homework1.sh 
+  496  history 10 >> output.txt
+  497  echo "字符数为:" >> output.txt
+  498  wc -c /home/seed/DX/missing-semester/2027/Seedofking/notes/Lesson_1_Notes.md >> output.txt
+  499  history 10 >> output.txt
+字符数为:
+13353 /home/seed/DX/missing-semester/2027/Seedofking/notes/Lesson_1_Notes.md
