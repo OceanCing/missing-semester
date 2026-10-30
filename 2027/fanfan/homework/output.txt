@@ -1,0 +1,12 @@
+2026年 10月 20日 星期二 22:41:12 HKT
+  43  git config --global user.name"fanfan0421"
+   44  git config --global user.email"15113121767@163.com"
+   45  git config --global user.name "fanfan0421"
+   46  git config --global user.email "15113121767@163.com"
+   47  git clone https://github.com/fanfan0421/missing-semester.git
+   48  cd missing-semester
+   49  git clone https://kgithub.com/fanfan0421/missing-semester.git
+   50  date
+   51  history|tail-n 10
+   52  history | tail -n 10
+笔记字数：612
