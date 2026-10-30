@@ -1,0 +1,17 @@
+===== 系统时间 =====
+2026年 10月 20日 星期二 20:52:43 CST
+
+===== 最近使用的10条命令 =====
+bilibili 
+/home/thunder/CodeProjects/map
+sudo chown -R $USER:$USER /home/thunder/ROSPrograms
+opencode 
+git clone https://github.com/1eoBao/missing-semester.git
+sudo chown -R $USER:$USER /home/thunder/文档/xwechat_files/wxid_wrkujqftzuyn22_ca3a/msg/file/2026-10
+code
+code .
+git clone https://github.com/1eoBao/missing-semester.git
+code .
+
+===== 笔记字数 =====
+1400
