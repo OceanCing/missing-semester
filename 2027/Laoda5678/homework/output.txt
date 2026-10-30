@@ -1,0 +1,14 @@
+当前系统时间
+Thu Oct 22 05:01:00 PM CST 2026
+
+最近使用的 10 条命令
+git switch -c my-WZL
+git branch -D my-WZL
+git branch -d my-WZL
+git switch master
+git branch -D my-WZL
+git switch -c WZL
+git branch
+code .
+df -h
+code .
