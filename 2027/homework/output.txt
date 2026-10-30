@@ -1,0 +1,17 @@
+===当前时间===
+2026年 10月 21日 星期三 16:15:01 CST
+
+===最近十条命令===
+  375  mkdir homework
+  376  cd homework
+  377  touch homework.sh
+  378  touch output.txt
+  379  rm output.txt
+  380  cd ..
+  381  cd ./homework
+  382  touch output.txt
+  383  chmod +x homework.sh
+  384  ./homework.sh
+
+===笔记字数===
+2595 ../notes/lesson1.md
