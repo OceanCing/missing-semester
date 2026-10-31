@@ -50,7 +50,7 @@ msgs意味着信息
 cd ~/catkin_smb
 rm -rf build devel
 source /opt/ros/noetic/setup.bash
-catkin_make
+catkin build
 source devel/setup.bash
 ```
 ## 6.没有scan

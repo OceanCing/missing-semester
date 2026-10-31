@@ -48,6 +48,96 @@ target_link_libraries(步骤3的源文件名
   ${catkin_LIBRARIES}
 )
 ```
+# launch文件
+launch 是 ROS 的启动脚本，后缀  .launch ，XML格式，用来一次性启动多个节点、加载参数、设置命名空间，不用一个个敲 rosrun
+语法以标签为主，可以单标签为一个语块，如<node ……/>，也可以<标签>……<标签/>为一个语块，都要添加/作为闭合标志
+## 常见标签
+### <launch>开头
+### <node>
+```xml
+<node name="scan_processor" pkg="smb_highlevel_controller" type="scan_processor" output="screen"/>
+```
+pkg ：功能包名字
+​type ：可执行文件名字（CMake里add_executable的名字）
+​name ：节点运行时名字，可以覆盖代码里的节点名
+output="screen" ：把日志打印到终端（不然看不到ROS_INFO）
+
+###  <rosparam> 
+加载yaml参数文件
+```xml
+<rosparam file="$(find smb_highlevel_controller)/config/config.yaml" command="load"/>
+```
+/$(find 包名)  自动找到这个包的路径，不用写绝对路径
+
+### <include>
+导入别的launch文件
+```xml
+<include file="$(find smb_gazebo)/launch/smb_gazebo.launch">
+    <arg name="xxx" value="1"/>
+</include>
+```
+ 用来嵌套启动别的launch，比如先启动gazebo仿真，再启动控制器
+ 传参数用  <arg> ，被包含的launch必须声明这个arg，不然报unused args
+
+# 动态参数
+## yaml文件
+YAML是ROS用来存放参数的配置文件，专门给参数服务器（Parameter Server）用，放传感器、控制器、算法的各种参数，不会写死在代码里。
+可以使参数实时动态发生变化，不用重启
+一般放在config/文件夹里面
+＃＃＃ 基础语法
+冒号后面必须带空格
+​用空格缩进，不能用Tab
+/#  是注释
+```yaml
+# config.yaml 示例
+laser_topic: /scan
+min_distance: 0.1
+max_distance: 5.0
+debug: true
+pid:
+  kp: 0.8
+  ki: 0.01
+  kd: 0.05
+```
+
+### 实现代码
+编写yaml文件
+代码读取参数
+```C++
+// 读取参数，第一个是yaml里的键名，第二个是变量
+nh.getParam("laser_topic", laser_topic);
+```
+加载参数
+```xml
+<launch>
+  <!-- 加载yaml，参数放到全局 -->
+  <rosparam file="$(find smb_highlevel_controller)/config/smb_param.yaml" command="load"/>
+
+  <node name="scan_processor" pkg="smb_highlevel_controller" type="scan_processor" output="screen"/>
+</launch>
+
+<launch>
+  <node name="scan_processor" pkg="smb_highlevel_controller" type="scan_processor" output="screen">
+    <!-- 私有参数，名字前面带 /scan_processor/ -->
+    <rosparam file="$(find smb_highlevel_controller)/config/smb_param.yaml" command="load"/>
+  </node>
+</launch>
+```
+
+### 命令行调试
+```
+# 查看所有参数
+rosparam list
+# 看某个参数的值
+rosparam get /scan_processor/pid/kp
+# 把当前所有参数导出成yaml备份
+rosparam dump backup.yaml
+# 手动加载yaml
+rosparam load smb_param.yaml
+```
+### 常见坑
+冒号后没空格如```kp:0.5```
+
 
 # ROS的通信
 ROS 中的基本通信机制主要有如下三种实现策略:
@@ -162,4 +252,196 @@ message/_runtime：程序运行阶段用
 编译后的中间文件查看:
 C++ 需要调用的中间文件(.../工作空间/devel/include/包名/xxx.h),后续在这里调用
 
-# 动态参数
+## 服务通信
+1. 理论模型
+ROS Master 负责保管 Server 和 Client 注册的信息，并匹配话题相同的 Server 与 Client ，帮助 Server 与 Client 建立连接，连接建立后，Client 发送请求信息，Server 返回响应信息。
+  - ROS master(管理者)
+  - Server(服务端)
+  - Client(客户端)
+2. 实现操作
+  0. Server注册
+  Server 启动后，会通过RPC在 ROS Master 中注册自身信息，其中包含提供的服务的名称。ROS Master 会将节点的注册信息加入到注册表中。
+  1. Client注册
+  Client 启动后，也会通过RPC在 ROS Master 中注册自身信息，包含需要请求的服务的名称。ROS Master 会将节点的注册信息加入到注册表中。
+  2. ROS Master实现信息匹配
+  ROS Master 会根据注册表中的信息匹配Server和 Client，并通过 RPC 向 Client 发送 Server 的 TCP 地址信息。
+  3. Client发送请求
+  Client 根据步骤2 响应的信息，使用 TCP 与 Server 建立网络连接，并发送请求数据。
+  4. Server发送响应
+### 服务通信自定义srv
+- 流程:
+srv 文件内的可用数据类型与 msg 文件一致，且定义 srv 实现流程与自定义 msg 实现流程类似:
+    按照固定格式创建srv文件
+    编辑配置文件
+    编译生成中间文件
+1. 定义srv文件
+服务通信中，数据分成两部分，请求与响应，在 srv 文件中请求和响应使用---分割
+```xml
+# 客户端请求时发送的两个数字
+int32 num1
+int32 num2
+---
+# 服务器响应发送的数据
+int32 sum
+```
+2. 编辑配置文件
+package.xml中添加编译依赖与执行依赖
+```
+  <build_depend>message_generation</build_depend>
+  <exec_depend>message_runtime</exec_depend>
+```
+CMakeLists.txt编辑 srv 相关配置
+```
+find_package(catkin REQUIRED COMPONENTS
+  roscpp
+  rospy
+  std_msgs
+  message_generation
+)
+# 需要加入 message_generation,必须有 std_msgs
+
+add_service_files(
+  FILES
+  AddInts.srv
+)
+
+generate_messages(
+  DEPENDENCIES
+  std_msgs
+)
+```
+3. 编译
+编译后的中间文件查看:
+C++ 需要调用的中间文件(.../工作空间/devel/include/包名/xxx.h)
+后续调用相关 srv 时，是从这些中间文件调用的
+
+#### 代码调用
+0. vscode配置
+```
+{
+    "configurations": [
+        {
+            "browse": {
+                "databaseFilename": "",
+                "limitSymbolsToIncludedHeaders": true
+            },
+            "includePath": [
+                "/opt/ros/noetic/include/**",
+                "/usr/include/**",
+                "/xxx/yyy工作空间/devel/include/**" //配置 head 文件的路径 
+            ],
+            "name": "ROS",
+            "intelliSenseMode": "gcc-x64",
+            "compilerPath": "/usr/bin/gcc",
+            "cStandard": "c11",
+            "cppStandard": "c++17"
+        }
+    ],
+    "version": 4
+}
+```
+1. 服务端
+```c++
+// bool 返回值由于标志是否处理成功
+bool doReq(demo03_server_client::AddInts::Request& req,
+          demo03_server_client::AddInts::Response& resp){
+    int num1 = req.num1;
+    //逻辑处理
+    return true;
+}
+
+...
+    // 3.创建 ROS 句柄
+    ros::NodeHandle nh;
+    // 4.创建 服务 对象
+    ros::ServiceServer server = nh.advertiseService("AddInts",doReq);
+...
+```
+2. 客户端
+```c++
+void reconfigCallBack(smb_highlevel_controller::WarningConfig &config, uint32_t level){
+    warning_enabled = config.warning_enabled;
+}
+
+...
+dynamic_reconfigure::Server<smb_highlevel_controller::WarningConfig> server;
+    server.setCallback(boost::bind(&reconfigCallBack,_1,_2));
+...
+```
+
+# 该笔记记录做smb小车仿真遇到的问题和解决
+
+## 1.Gazebo GUI 图形界面崩溃
+简单来说，docker 容器默认**没有 X11 图形转发**，Gazebo 的 GUI（gzclient）要渲染窗口，找不到显示器，直接崩溃。已经运行的容器无法添加，只能重新创建容器并配置 X11 转发
+```
+docker run -it \
+  --name ros-noetic-x11 \
+  --env DISPLAY=$DISPLAY \
+  --env QT_X11_NO_MITSHM=1 \
+  --volume /tmp/.X11-unix:/tmp/.X11-unix \
+  --volume ~/dockerFileShare:/root/download \
+  --network host \
+  osrf/ros:noetic-desktop-full
+```
+
+当需要用x11时，在终端机先放行 X 访问
+```
+xhost +local:root
+```
+
+用完记得回收，也可以不用
+```
+xhost -local:root
+```
+
+## 2.Gazebo仿真为什么可以和ros通信
+靠的是**gazebo_ros**包---他编译时把ros的库链接进gazebo，gazebo本身变成一个**ROS节点**（名为gazebo），所以可以进行通信
+
+## 3.需要什么依赖包
+```
+geometry_msgs
+sensor_msgs
+nav_msgs
+```
+msgs意味着信息
+
+## 3. sensor_msgs/LaserScan.msg
+数组代表激光束，从左到右
+
+## 4.无效测量
+`sensor_msgs/LaserScan` 里的规则：
+
+- `inf`（无穷大）：激光打出去，没有碰到障碍物，超出雷达最大测距；
+- `nan`（Not a Number）：传感器出错、读数非法；
+- `value < msg->range_min`：离雷达太近，超出雷达最小测量下限；
+- `value > msg->range_max`：超过雷达最大量程。
+
+# 5.无法找到包，无法启用环境
+```
+cd ~/catkin_smb
+rm -rf build devel
+source /opt/ros/noetic/setup.bash
+catkin build
+source devel/setup.bash
+```
+## 6.没有scan
+缺少 `pointcloud_to_laserscan` 这个包
+
+## 7.ros::spin()
+只是循环回调函数，main只执行一次
+
+##8. ros::Subscriber sub1 = nh.subscribe<sensor_msgs::LaserScan>("/scan",10,boost::bind(scanCallback,_1,boost::ref(pub)));
+用bind必须表明类型
+
+## 9.launch文件，<node>包裹<rosparam>
+这使参数变为这个节点的私有变量，引用要加上这个节点的名字name/
+
+## 10.有关launch语法
+/是闭合，类似于{} 
+
+## 11.关于rviz
+rviz是ros的可视化工具，能将话题的信息可视化，可以理解为传感器的视野
+
+## 12.一旦 `source devel/setup.bash`，PATH 被污染，ros 基础命令直接消失
+老版本bug，改用 catkin build
+
