@@ -1,0 +1,18 @@
+系统时间:
+2026-10-18 16:49:58 CST
+
+最近使用的10条命令
+vim output.txt 
+cd homework/
+ls
+vim output.txt 
+vim 2.sh 
+vim output.txt 
+vim 2.sh 
+bash 2.sh 
+vim output.txt 
+vim 2.sh 
+
+笔记的字数(包含空格和换行)
+2032
+
