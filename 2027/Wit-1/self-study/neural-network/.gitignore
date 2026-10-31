@@ -1,0 +1,7 @@
+__pycache__/
+*.py[cod]
+*.pt
+*.onnx
+*.npz
+build/
+records/

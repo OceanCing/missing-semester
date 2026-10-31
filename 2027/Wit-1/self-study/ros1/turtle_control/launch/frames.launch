@@ -1,0 +1,9 @@
+<launch>
+  <!-- ROS 1 Noetic order: x y z yaw pitch roll parent_frame child_frame. -->
+  <arg name="yaw" default="1.5707963267948966"/>
+  <node pkg="tf2_ros" type="static_transform_publisher" name="lesson_robot_frame"
+        args="5 3 0 $(arg yaw) 0 0 lesson_world lesson_robot"
+        output="screen" required="true"/>
+  <node pkg="turtle_control" type="point_to_world" name="point_to_world"
+        output="screen"/>
+</launch>

@@ -1,0 +1,12 @@
+<launch>
+  <arg name="linear" default="1.0"/>
+  <arg name="angular" default="0.0"/>
+  <arg name="duration" default="3.0"/>
+  <node pkg="turtlesim" type="turtlesim_node" name="turtlesim"
+        output="screen" required="true"/>
+  <node pkg="turtle_control" type="turtle_motion" name="turtle_motion" output="screen">
+    <param name="linear" value="$(arg linear)" type="double"/>
+    <param name="angular" value="$(arg angular)" type="double"/>
+    <param name="duration" value="$(arg duration)" type="double"/>
+  </node>
+</launch>

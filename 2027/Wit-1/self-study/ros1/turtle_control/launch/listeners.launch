@@ -1,0 +1,16 @@
+<launch>
+  <!-- Both instances observe the existing turtle; start lesson.launch first. -->
+  <group ns="observer_a">
+    <node pkg="turtle_control" type="turtle_pose_listener"
+          name="pose_listener" output="screen">
+      <remap from="turtle1/pose" to="/turtle1/pose"/>
+    </node>
+  </group>
+
+  <group ns="observer_b">
+    <node pkg="turtle_control" type="turtle_pose_listener"
+          name="pose_listener" output="screen">
+      <remap from="turtle1/pose" to="/turtle1/pose"/>
+    </node>
+  </group>
+</launch>

@@ -1,0 +1,14 @@
+%YAML:1.0
+# Area comparison: only min_area differs from _shared/config/detector.yaml.
+hue_center: 0
+hue_radius: 10
+saturation_min: 100
+value_min: 50
+min_area: 900
+min_ratio: 3.0
+max_tilt: 35.0
+max_difference: 10.0
+min_length_ratio: 0.7
+max_y_offset_ratio: 0.3
+min_separation_ratio: 0.5
+max_separation_ratio: 1.5

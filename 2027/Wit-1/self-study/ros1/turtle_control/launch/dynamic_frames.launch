@@ -1,0 +1,8 @@
+<launch>
+  <!-- Reuse the live turtle from lesson.launch. -->
+  <arg name="pose_topic" default="/turtle1/pose"/>
+  <node pkg="turtle_control" type="turtle_tf_broadcaster"
+        name="turtle_tf_broadcaster" output="screen">
+    <remap from="turtle1/pose" to="$(arg pose_topic)"/>
+  </node>
+</launch>

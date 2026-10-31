@@ -1,0 +1,61 @@
+Panels:
+  - Class: rviz/Displays
+    Name: Displays
+  - Class: rviz/Views
+    Name: Views
+Visualization Manager:
+  Class: ""
+  Global Options:
+    Fixed Frame: turtle_world
+    Background Color: 40; 40; 40
+    Frame Rate: 30
+  Displays:
+    - Class: rviz/Grid
+      Name: Grid
+      Enabled: true
+      Reference Frame: turtle_world
+      Plane: XY
+      Plane Cell Count: 20
+      Cell Size: 1
+      Alpha: 0.4
+      Color: 160; 160; 160
+    - Class: rviz/RobotModel
+      Name: RobotModel
+      Enabled: true
+      Robot Description: robot_description
+      Visual Enabled: true
+      Collision Enabled: false
+      Alpha: 1
+    - Class: rviz/TF
+      Name: TF
+      Enabled: true
+      Show Names: false
+      Show Axes: true
+      Show Arrows: false
+      Marker Scale: 2
+      Frames:
+        All Enabled: false
+        turtle_world:
+          Value: true
+        turtle_body:
+          Value: true
+        camera_link:
+          Value: true
+  Tools:
+    - Class: rviz/MoveCamera
+    - Class: rviz/Select
+  Views:
+    Current:
+      Class: rviz/Orbit
+      Name: Current View
+      Target Frame: turtle_world
+      Distance: 5.061898231506348
+      Focal Point:
+        X: 4.426314353942871
+        Y: 5.312967777252197
+        Z: 0.43190693855285645
+      Pitch: 0.5349999070167542
+      Yaw: 1.0350000858306885
+Window Geometry:
+  Width: 1100
+  Height: 826

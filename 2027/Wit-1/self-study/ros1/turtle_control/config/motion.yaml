@@ -1,0 +1,4 @@
+# Loaded into the turtle_motion node's private parameter namespace.
+linear: 0.5
+angular: 1.0
+duration: 6.3

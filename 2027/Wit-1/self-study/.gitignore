@@ -1,0 +1,24 @@
+# Build products and local runtime data.
+build/
+devel/
+install/
+logs/
+.catkin_tools/
+.opencv-build/
+records/
+.runtime/
+CMakeFiles/
+CMakeCache.txt
+__pycache__/
+*.py[cod]
+*.log
+*.tmp
+*.bak
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Recordings are kept locally; commit selected small evidence explicitly.
+*.bag
+*.bag.active

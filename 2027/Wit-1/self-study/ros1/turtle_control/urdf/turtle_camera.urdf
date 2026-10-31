@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<robot name="turtle_camera_demo">
+  <material name="body_blue">
+    <color rgba="0.15 0.45 0.85 1"/>
+  </material>
+  <material name="camera_orange">
+    <color rgba="1.0 0.5 0.1 1"/>
+  </material>
+
+  <link name="turtle_body">
+    <visual>
+      <origin xyz="0 0 0.1" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.6 0.4 0.2"/>
+      </geometry>
+      <material name="body_blue"/>
+    </visual>
+  </link>
+
+  <link name="camera_link">
+    <visual>
+      <geometry>
+        <box size="0.12 0.10 0.10"/>
+      </geometry>
+      <material name="camera_orange"/>
+    </visual>
+  </link>
+
+  <!-- Example mounting offset in the body frame, in metres and radians. -->
+  <joint name="camera_mount" type="fixed">
+    <parent link="turtle_body"/>
+    <child link="camera_link"/>
+    <origin xyz="0.4 0 0.3" rpy="0 0 0"/>
+  </joint>
+</robot>

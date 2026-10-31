@@ -1,0 +1,7 @@
+<launch>
+  <!-- Reuse the live turtle from lesson.launch. -->
+  <arg name="config_file" default="$(find turtle_control)/config/motion.yaml"/>
+  <node pkg="turtle_control" type="turtle_motion" name="turtle_motion" output="screen">
+    <rosparam command="load" file="$(arg config_file)"/>
+  </node>
+</launch>

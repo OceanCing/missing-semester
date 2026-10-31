@@ -1,0 +1,16 @@
+<launch>
+  <!-- Keep lesson.launch and dynamic_frames.launch running for world -> body. -->
+  <arg name="show_rviz" default="true"/>
+  <param name="robot_description"
+         textfile="$(find turtle_control)/urdf/turtle_camera.urdf"/>
+
+  <node pkg="robot_state_publisher" type="robot_state_publisher"
+        name="lesson_robot_state_publisher" output="screen">
+    <param name="use_tf_static" value="true"/>
+  </node>
+
+  <node if="$(arg show_rviz)" pkg="rviz" type="rviz" name="lesson_model_view"
+        args="-d $(find turtle_control)/rviz/turtle_model.rviz" output="screen">
+    <env name="DISABLE_ROS1_EOL_WARNINGS" value="1"/>
+  </node>
+</launch>
