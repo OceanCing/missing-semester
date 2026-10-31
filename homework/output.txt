@@ -1,0 +1,15 @@
+1.当前系统时间
+Wed Oct 21 01:32:05 PM CST 2026
+2.最近使用的十条命令
+	 nano script.sh
+	 chmod +x script.sh
+	 ./script.sh
+	 cat output.txt
+	 rm -f script.sh output.txt
+	 nano script.sh
+	 chmod +x script.sh && ./script.sh
+	 nano script.sh
+	 chmod +x script.sh
+	 ./script.sh
+3.笔记字数
+843 notes.md
