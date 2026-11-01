@@ -1437,7 +1437,7 @@ git lfs install                 # 在 ~/.gitconfig 里挂上 LFS 的钩子(每�
 
 ## 五、 CPP
 
-**C++ 前期学习笔记**[点击查看](https://github.com/PFlaoba/Git-Testing/blob/main/MyNote.pdf)
+[C++ 前期学习笔记](https://github.com/PFlaoba/Git-Testing/blob/main/MyNote.pdf)
 
 ## 总结
 
