@@ -1,0 +1,17 @@
+==== 当前系统时间 ====
+2026年 10月 20日 星期二 10:02:14 CST
+
+==== 最近10条命令 ====
+nano ta
+nano task1.sh 
+./task1.sh > output.txt
+nano task1.sh 
+./task1.sh > output.txt
+history -w
+./task1.sh > output.txt
+cat task1.sh 
+nano task1.sh 
+history -w
+
+==== 笔记文件字数 ====
+494 ../notes/lesson1w-notes.md
