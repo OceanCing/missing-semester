@@ -1,0 +1,15 @@
+2026年 10月 22日 星期三 12:45:07 CST
+2026年 10月 22日 星期三 12:46:55 CST
+2026年 10月 22日 星期三 23:38:07 CST
+2026年 10月 22日 星期四 00:15:07 CST
+vim firstclass.sh 
+cd missing-semester/
+cd 2027
+ls
+cd c
+cd clock0723/
+ls
+cd homework/
+bash firstclass.sh 
+cat output.txt 
+5120
