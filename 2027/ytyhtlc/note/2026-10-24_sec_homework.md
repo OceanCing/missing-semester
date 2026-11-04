@@ -14,7 +14,7 @@
 
 这里放一个流程图
 
-![image-20261024201718405](/home/lichen/.config/Typora/typora-user-images/image-20261024201718405.png)
+![image-20261024201718405](images/image-20261024201718405.png)
 
 **整个编译过程是由编译驱动程序来执行，从用高级语言写好的文本文件到可执行文件的过程**
 
@@ -30,7 +30,7 @@
 
 ### 4.虚拟内存和虚拟地址空间
 
-![image-20261024204609671](/home/lichen/.config/Typora/typora-user-images/image-20261024204609671.png)
+![image-20261024204609671](images/image-20261024204609671.png)
 
 > 这里是关于链接的一个计算机体系的底层背景知识，解析连接器在执行时，需要为代码和数据确定虚拟地址，因此插入这里的知识
 
@@ -40,7 +40,7 @@
 
 ### 5.静态链接详细过程
 
-![image-20261024210054275](/home/lichen/.config/Typora/typora-user-images/image-20261024210054275.png)
+![image-20261024210054275](images/image-20261024210054275.png)
 
 先是解析了目标文件的结构，也就是在Linux中的ELF格式文件，这些文件带一些命令行参数输入进**静态链接器**然后产生完全链接的，可以加载和运行的**可执行目标文件**
 
@@ -68,7 +68,7 @@
 
 ### 7.动态链接和共享库
 
-![image-20261024211000857](/home/lichen/.config/Typora/typora-user-images/image-20261024211000857.png)
+![image-20261024211000857](images/image-20261024211000857.png)
 
 上面解析的是静态库，但是静态库的缺点是浪费内存空间，当两个程序共享一个模块，会因为复制两份而浪费空间（*有点类似C++里的引用传递或者指针传地址,而不使用直接将类或字符串直接复制进函数*），因此诞生了**共享库**
 
@@ -129,7 +129,7 @@ harness-agent-LLM
 
 #### 整个运转配合流程
 
-![image-20261024220138530](/home/lichen/.config/Typora/typora-user-images/image-20261024220138530.png)
+![image-20261024220138530](images/image-20261024220138530.png)
 
 上面是加入了harness的三者运转关系
 
@@ -225,7 +225,7 @@ mkdir -p ~/catkin_ws/src
 
 这里可以嵌入[ros文件系统](https://www.autolabor.com.cn/book/ROSTutorials/chapter1/15-ben-zhang-xiao-jie/151-roswen-jian-xi-tong.html)的解析
 
-![image-20261024222150320](/home/lichen/.config/Typora/typora-user-images/image-20261024222150320.png)
+![image-20261024222150320](images/image-20261024222150320.png)
 
 这个catkin 可以用来构建类似的工程，因为类似package.xml这些文件cmake是不会去读的，还有catkin可以实现对ros功能包的一些声明依赖关系的操作，总之是涉及ros层面的文件管理
 
