@@ -4,7 +4,7 @@
 
 ## 前言
 
-**爆肝4天整理的超全面的ROS笔记，完结了！！**
+**爆肝4天整理的20681字超全面的ROS笔记，完结了！！**
 
 > 首先呢，在学习这个ROS的过程，许多对知识和机制的解析我都是通过看视频，查文档，以及跟AI对线来完成的，很多知识点的解析是用AI直接生成的，毕竟有详细层次又清晰，**为什么不一边学一边用自己的方式总结呢**,因为我觉得总结这种东西，应该在学得差不多或者说到了一个新阶段前，可以去总节一下前一段时间学的，不然很多时候，刚刚开始学，体系都没架好，知识点都不一定理解对（虽然现在也不一定），总结啥啊，会很片面和结构混乱，当学完一个阶段后，大致能理解整个架构是怎样了，这样再去总结就可以梳理出一个比较清晰的文章，**这是我对古法手搓总结的个人看法**
 
@@ -106,7 +106,7 @@ ROS它是一个更大范围的软件链路，ros_control是基于ros的一种组
 
 这里附一张经典机器人系统结构图
 
-![image-20261103064937662](/home/lichen/.config/Typora/typora-user-images/image-20261103064937662.png)
+![image-20261103064937662](images/image-20261103064937662.png)
 
 
 
@@ -157,7 +157,7 @@ ROS它是一个更大范围的软件链路，ros_control是基于ros的一种组
 
 > 废话不多说，对于架构的梳理会有种学物理突然将一堆共性串联起来的“成体系”“大一统”的感觉，先上AI总结图，它大概可以分为三层
 
-![image-20261103074120443](/home/lichen/.config/Typora/typora-user-images/image-20261103074120443.png)
+![image-20261103074120443](images/image-20261103074120443.png)
 
 ### 3.1 三层架构
 
@@ -254,11 +254,11 @@ ROS它是一个更大范围的软件链路，ros_control是基于ros的一种组
 
 照例，先来精美的结构图
 
-![image-20261103201336673](/home/lichen/.config/Typora/typora-user-images/image-20261103201336673.png)
+![image-20261103201336673](images/image-20261103201336673.png)
 
-![image-20261103201419288](/home/lichen/.config/Typora/typora-user-images/image-20261103201419288.png)
+![image-20261103201419288](images/image-20261103201419288.png)
 
-![image-20261103201453624](/home/lichen/.config/Typora/typora-user-images/image-20261103201453624.png)
+![image-20261103201453624](images/image-20261103201453624.png)
 
 ### 4.1 工作空间
 
@@ -383,7 +383,7 @@ my_package/
 
 这样看着太抽象，看看工程里的实际代码，只截取部分
 
-![image-20261103222645082](/home/lichen/.config/Typora/typora-user-images/image-20261103222645082.png)
+![image-20261103222645082](images/image-20261103222645082.png)
 
 我一开始学这个文件时看到哪些**“声明依赖”**之类的介绍，其实根本不知道有什么用，后续复习中就深入了解了这个文件到底是给谁用：
 
@@ -494,11 +494,11 @@ catkin_package(
 
 #### 结构图
 
-![image-20261104072741327](/home/lichen/.config/Typora/typora-user-images/image-20261104072741327.png)
+![image-20261104072741327](images/image-20261104072741327.png)
 
-![image-20261104072807649](/home/lichen/.config/Typora/typora-user-images/image-20261104072807649.png)
+![image-20261104072807649](images/image-20261104072807649.png)
 
-![image-20261104072836877](/home/lichen/.config/Typora/typora-user-images/image-20261104072836877.png)
+![image-20261104072836877](images/image-20261104072836877.png)
 
 ### 5.1 节点
 
@@ -643,7 +643,7 @@ master还负责公共的参数服务器
 
 **这里有点像上面节点图通信接口的话题或服务名，这里的参数也是有绝对名，相对名和私有名，和上面的推导方式一致，也会在某些情况下依赖节点的作用域，使用NodeHandle来制定作用域**
 
-![image-20261104222024575](/home/lichen/.config/Typora/typora-user-images/image-20261104222024575.png)
+![image-20261104222024575](images/image-20261104222024575.png)
 
 像这里每一层级就是不同作用域，读取时也要指定作用域才能正确读取
 
@@ -782,11 +782,11 @@ rosparam load params.yaml /robot
 
 ### 先上结构图
 
-![image-20261104223310114](/home/lichen/.config/Typora/typora-user-images/image-20261104223310114.png)
+![image-20261104223310114](images/image-20261104223310114.png)
 
-![image-20261104223332531](/home/lichen/.config/Typora/typora-user-images/image-20261104223332531.png)
+![image-20261104223332531](images/image-20261104223332531.png)
 
-![image-20261104223344021](/home/lichen/.config/Typora/typora-user-images/image-20261104223344021.png)
+![image-20261104223344021](images/image-20261104223344021.png)
 
 ### 6.1 通信公共机制
 
@@ -1635,7 +1635,7 @@ front_left_joint_.setCommand(pid_fl_.computeCommand(e_fl, period));
 
 当然，不能少了经典架构图
 
-![image-20261105000705455](/home/lichen/.config/Typora/typora-user-images/image-20261105000705455.png)
+![image-20261105000705455](images/image-20261105000705455.png)
 
 ### 7.1 核心机制
 
