@@ -1,0 +1,12 @@
+2026年 10月 17日 星期六 23:58:41 HKT
+ 4017  pkill docker
+ 4018  docker stop
+ 4019  docker stop ros-noetic
+ 4020  docker status
+ 4021  docker exec -it bash
+ 4022  docker exec --help
+ 4023  docker ps -a --filer name=ros-noetic
+ 4024  docker ps -a --filter name=ros-noetic
+ 4025  ps -eo pid,user,%mem,rss,comm --sort=-%mem | head
+ 4026  top
+1122 ../note/2026-10-17_first_homework.md
