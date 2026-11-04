@@ -528,3 +528,139 @@ int main(int argc, char **argv)  //atgc 这个是什么呢 这个记录了 终�
     return 0; //main()退出
 }
 ```
+### 撰写一个subscriber
+```cpp
+# include<ros/ros.h>
+# include<turtlesim/Pose.h> //Pose 是turtlesim 包里面的一个 pose.msg 文件 它记录着 ”海龟位置“的信息结构
+                            //我在CMakeLists.txt 里就已经写好了 我要依赖的包了 在这个包里面就有 Pose.h这个文件 所以编译会过..
+void callback(const turtlesim::Pose::ConstPtr &msg) //回调函数 这个函数的参数是一个指针 指向 Pose 结构体
+                                                    // ConstPtr 就是 shared_ptr<const turtlesim::Pose> 
+                                                    //&msg 是一个引用 
+                                                    // 所以callback 函数传入的是一个 Pose 结构体的智能指针
+{
+    ROS_INFO("x:%f,y:%f,theta:%f",msg->x,msg->y,msg->theta); //打印出海龟的位置
+}
+
+int main(int argc,char **argv) //依旧读取终端 输入命令
+{
+    ros::init(argc,argv,"my_subscriber"); //初始化ros节点 跟 Master 报道 将自己的 ip 地址和端口号告诉 Master 让 Master 记录下来
+    ros::NodeHandle n; //创建 奴隶
+    ros::Subscriber sub = n.subscribe("turtle1/pose",1000,callback); //订阅topic turtle/pose 1000个队列长度 
+	// Subscriber sub 就是 一个管理通路这个通路的对象 里面主要包括了 一个 impl_指指向一个 SubscriberImpl类 
+    // 这个SubscruberImpl 类里面记录了 这个通路的名字 用来解析数据的helper_ 还有一个nodehandle
+    // 过程是 subscriptionQueue 收到数据
+	//向 CallbackQueue 写入任务 （注意 CallbackQueue 也是一个队列）
+	// 然后 ros::spin() 这个函数会去 CallbackQueue 里面取出任务 执行
+	// 利用ros::Subscriber sub 这个对象里 impl -> Impl 里面的 helper_ 解析subscriptionQueue 里的数据 
+	// 解析后的数据 放在一个 堆上的临时 Pose 结构体里 然后把这个临时的 Pose 结构体的地址传给 callback 函数
+    ros::spin();
+    return 0;
+}
+```
+### 撰写一个Client
+```cpp
+#include<ros/ros.h>
+#include<turtlesim/Spawn.h>//发送请求的格式封装在turtlesim包 的 Spawn.msg里面
+
+int main(int argc ,char ** argv)
+{
+    ros::init(argc,argv,"turtle_spawn");
+    ros::NodeHandle n;
+
+    ros::service::waitForService("/spawn"); //这是堵塞型函数 如果没有找到 /spawn service 存在 就会一直等待
+
+    ros::ServiceClient add_turtle = n.serviceClient<turtlesim::Spawn>("/spawn");
+    //n.serviceClient() 函数是向 Master 查询一个 名为 /spawn 服务地址 然后返回给 add_turtle
+    // 我们就可以通过 add_turtle 来调用 spawn 这个service 了
+    //这里的ServiceClient 是一个本地客户端 和 NodeHandle 一样 通过它来发送 call 通过它来受到 resopnd
+    turtlesim::Spawn srv; //turtlesim 库里面 封装了 Spawn 这个类 是Api 标准格式
+                          // srv 里存两东西 request 和 response 
+                          // request 是 发送给 servicce 的消息
+                          // service 执行完毕以后将 完成消息 塞进 response 里面
+    srv.request.x = 2.0;
+    srv.request.y = 2.0;
+    srv.request.name = "turtle2";
+
+    ROS_INFO("ready to call spawn");
+
+    if( add_turtle.call(srv) ) //这是一个堵塞型的函数 一直等到 有回答数据 才继续下一行
+    {                     // 如果call成功 add_turtle.call() 会返回1;
+ 
+    ROS_INFO("Spawn turtle successfully [name:%s]",srv.response.name.c_str()); //这里name就是一个string 但是ROS_INFO 看不懂string
+                                                                               //所以调用 c_str() 转换成char* 让ROS_INFO看懂
+    }
+    else{
+        ROS_ERROR("Fail to call spawn");
+    }
+    return 0;
+}
+```
+
+### 撰写一个Server
+```cpp
+#include <ros/ros.h>
+#include <geometry_msgs/Twist.h>
+#include <std_srvs/Trigger.h>
+
+bool pubcommand = false;
+
+bool commandCallBack(std_srvs::Trigger::Request &req,std_srvs::Trigger::Response &res) 
+                    //Client .call() 发过来的是一个标准的API(你也可以自己写)
+                    //这个API是一个结构体 Trigger
+                    //Trigger 包含了一个 request 结构体 和一个 response 结构体
+                    //request 结构体是 Client 填好的请求的数据 比如说 Turtlesim::Spawn srv  srv.request.x = 1.0; srv.request.y = 0.2; 这里就写好了request 再通过 .call() 传过来
+                    //resopnse 就是要传回去Client 的数据 比如说: response.name = "turtle2" Client 就可以受到一个 string 意思是turtle创建成功名字是 "turtle2"
+                    
+        
+{
+    pubcommand = !pubcommand; //受到一次call()就变换一次运动年状态
+    res.success = true;
+    res.message = pubcommand ? "start" : "stop";
+    return true;
+}
+
+int main(int argc, char **argv)
+{
+    ros::init(argc, argv, "turtle_command_server");
+    ros::NodeHandle n;
+
+    ros::ServiceServer command_service =
+        n.advertiseService("/turtle_command", commandCallBack); //在这里会向Master 注册一个Service 
+        // 分别告诉Master 这个Service 的 名字 还有发布这个 Service 的节点地址
+        // 这个 Service 是这样运转的 :: 
+        // 首先 有一个Client .serviceClient() 跟Master声明 "我要向这个Service 发call" Master 就会将Server 的地址返回给Client
+         //Client 利用句柄 .call() 就将请求的 Api 发送给了 Server
+         //Server 底层维护了一个 队列 CallBackQueue 
+        //这个队列就会受到这个API 将它打包成一个等待 丢入 回调函数的数据
+        //在 调用 ros::spinOnce()的时候 ros就会检查 CallBackQueue 还有多少个 没有丢进Callback 的数据 
+        // 让程序中断 调用 回调函数 知道在这一刻之前的所有数据被运用完毕
+    ros::Publisher Turtle_vel = 
+        n.advertise<geometry_msgs::Twist>("/turtle1/cmd_vel", 10);
+
+    ROS_INFO("Ready to receive turtle command");
+
+    ros::Rate loop_rate(10);
+    while (ros::ok())
+    {
+        ros::spinOnce();
+
+        if (pubcommand)
+        {  
+            geometry_msgs::Twist vel_cmd;
+            vel_cmd.linear.x = 0.5;
+            vel_cmd.angular.z = 0.2;
+            Turtle_vel.publish(vel_cmd);
+            //这里讲一下小海龟的运动机制
+            //当没有收到订阅的Twist 的 时候 计时开始
+            //小海龟从/turtle1/cmd_vel 里面得到Twist 数据 然后将自身的运动状态和Twist同步 计时清0
+            //当计时达到1秒 小海龟不动
+        }
+
+        loop_rate.sleep(); //这里限制了turtle/cmd_vel 的发布速度最快是 100ms
+                           //也限制了Server 接收数据的最快速度是 100ms 
+                           //如果你再 100ms内 call 了 多次 那么这些call 都会被压缩
+                           //同样的 如果你在1s内变化了两次 turtle的运动状态 turtle 就不会察觉你两次变化中的停顿
+    }
+    return 0;
+}
+```
