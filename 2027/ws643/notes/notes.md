@@ -342,6 +342,7 @@ wc -l < a.txt #wc--t统计字数，-l统计行数，表示，读取a.txt的行�
  ###### upstream = fork过来的原仓库
  上游：本地分支对应的远程分支
   - ==git remote add upstream <老师仓库的URL> ------绑定原仓库用于pull更新==
+  - git rename origin upstream ----如果clone下来发现origin绑错了，可以更名
   - git remote -v    -------查看连了哪些仓库
     （会输出4个，两个fetch两个push,origin和upstream）
   - git branch -vv  ------查看当前分支绑定了哪个上游仓库
