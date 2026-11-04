@@ -1,0 +1,15 @@
+系统时间
+Wed Oct 21 11:10:49 PM CST 2026
+最近使用的 10 条命令
+cd missing-semester
+git status
+git switch -c Fifiiiii-123-homework1
+git status
+cd 2027
+mkdir Fifiiiii-123
+cd Fifiiiii-123
+mkdir notes homework 
+ls
+nano notes/linux-shell-vim-git.md
+笔记字数
+1174 ../notes/linux-shell-vim-git.md
