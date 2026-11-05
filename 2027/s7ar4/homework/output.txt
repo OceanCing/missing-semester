@@ -1,0 +1,20 @@
+===== 1. 运行脚本时的系统时间 =====
+2026-10-22 19:44:02 CST (星期四)
+
+===== 2. 最近使用的 10 条命令 =====
+git commit -m "Add lesson 01 notes."
+git push -u origin feature/lesson01
+cd ~/missing-semester && git status -sb && git diff --stat
+cd ~/missing-semester && git add 2027/s7ar4/notes/lesson01-linux-vim-shell-git.md && git commit --amend --no-edit
+cd ~/missing-semester && git push --force-with-lease
+cd ~/missing-semester && git log --oneline -2 && git status -sb && git ls-remote origin feature/lesson01
+ls -a ~/missing-semester/2027/s7ar4/notes/
+ps -ef | grep "[v]im"
+mv ~/桌面/homework.sh ~/missing-semester/2027/s7ar4/homework/homework.sh && chmod +x ~/missing-semester/2027/s7ar4/homework/homework.sh
+cd ~/missing-semester/2027/s7ar4/homework && ./homework.sh && cat output.txt
+
+===== 3. 笔记的字数 =====
+笔记文件：/home/s7ar4/missing-semester/2027/s7ar4/notes/lesson01-linux-vim-shell-git.md
+行数：377
+字符数（含空格与标点）：6883
+非空白字符数：5622
