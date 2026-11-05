@@ -13,7 +13,7 @@
 
 同一个目录，挂载出来两个路径写法，内容完全一样。宿主机终端只在开机、修权限的时候用一下。
 
-### 0.2 每次开工的三条命令
+### 0.2 进入ROS
 
 ```
 xhost +local:root   # 在宿主机任意终端放行图形界面（每次重启电脑后要做一次）
@@ -21,27 +21,27 @@ docker start ros1 && docker exec -it ros1 bash  # 进容器（宿主终端）
 source /opt/ros/noetic/setup.bash  # 让 ROS 的命令能用（容器内）
 ```
 
-`start` 是开机；`exec -it` 是再开一个终端进同一个容器。为什么不用 `docker run`？`run` 是从镜像新造一个容器，你前装的东西就会没。
+`start` 是开机；`exec -it` 是再开一个终端进同一个容器。为什么不用 `docker run`？`run` 是从镜像新造一个容器，以前装的东西就会没。
 提示符变成 `root@一串数字:~#`，说明已经在容器里。
-**第三条每开一个新终端都要敲一次**，不然报 `roscore: command not found`。这是环境变量没加载。把它写进容器的 `~/.bashrc`，之后 `docker exec` 进去就可以自动打开。
+**第三条每开一个新终端都要敲一次**，不然报 `roscore: command not found`。这是因为环境变量没加载。把将它写进容器的 `~/.bashrc`，之后 `docker exec` 进去就可以自动打开。
 
-> 但后续我已经用 VS Code 连进容器，第二~三步都可以省：集成终端本来就开在容器里，而且 `/root/.bashrc` 第 100 行已经有 `source /opt/ros/noetic/setup.bash`，一开终端 ROS 环境就在。这两条只在「宿主终端」里手工敲的时候才用得上。
+> 但后续我已经用 VS Code 连进容器，第二~三步都可以省：集成终端本来就开在容器里，而且 `/root/.bashrc` 已经有 `source /opt/ros/noetic/setup.bash`，一开终端 ROS 环境就在。这两条只在「宿主终端」里手敲的时候才用得上。
 
 ### 0.3 编辑器：VS Code 直接连进容器（本笔记的用法）
 
-先给结论：**不用往容器里装编辑器，也不用在两个窗口之间来回切。** 宿主机的 VS Code 加一个 Dev Containers 扩展，attach 到 `ros1`，这个窗口里：
+把宿主机的 VS Code 加一个 Dev Containers 扩展，attach 到 `ros1`，这个窗口里：
 
 - 左侧文件树看到的就是容器内的 `/root/ros1_ws`，改了就是容器里的文件，不用复制粘贴
 - 按 `Ctrl` + 反引号（Esc 下面那个键）打开的终端就是容器内的 shell，`catkin_make`、`rosrun` 直接跑
 - 语法高亮、跳转、C++ 补全都在，因为扩展是装进容器里的，宿主那边不受影响
 
-六步装法（本机已走通；容器重建后第 3、5 步要重走）：
+六步装法（容器重建后第 3、5 步要重走）：
 
 1. 宿主终端装扩展：`code --install-extension ms-vscode-remote.remote-containers`
 2. 确认容器在跑：`docker start ros1 && docker ps --filter name=ros1`
 3. VS Code 里按 `F1` → 输入 `attach` → 选「Dev Containers: 附加到正在运行的容器」→ 点 `ros1`，等右下角进度条把 server 装完
 4. 「文件」→「打开文件夹」→ 输入 `/root/ros1_ws` → 确定
-5. 扩展面板搜 `C++` → 点「**在容器中安装**」。这步最容易漏：宿主的扩展不会自动跟到容器里，漏了 `#include <ros/ros.h>` 还是红线
+5. 扩展面板搜 `C++` → 点「**在容器中安装**」。宿主的扩展不会自动跟到容器里，漏了 `#include <ros/ros.h>` 还是红线
 6. 按 `Ctrl` + 反引号开集成终端，`cd /root/ros1_ws && catkin_make`
 
 这是ai给出的四个坑：
@@ -70,8 +70,6 @@ source /opt/ros/noetic/setup.bash  # 让 ROS 的命令能用（容器内）
 | 通信中间件 | 节点之间怎么说话，这是唯一的对话方式 | 话题（连续数据流）、服务（一次问答）、参数（全局配置） |
 | 工具链 | 编译、启动、看、录 | `catkin` 编译、`roslaunch` 编排、`rviz`/`rqt` 看、`rosbag` 录 |
 | 软件生态 | 几万个现成的包，C++ 接口居多 | OpenCV、PCL、Eigen、Navigation、MoveIt、相机雷达 IMU 驱动 |
-
-生态这条最值钱：别人写的驱动包，你装上来就能用，不用从寄存器开始啃。
 
 ### 1.4 在车上：一条从相机到轮子的流水线
 车上的数据是这么流的：
@@ -134,7 +132,7 @@ Master 是个「介绍所」，跑在 11311 端口。它干四件事：名字注
 
 注册完、握手完，数据就在两个节点之间直连，**Master 不再参与**。
 
-所以：**Master 挂了，已经连上的节点照样跑，但新来的连不上。** 中途 `roscore` 意外退出，你不会立刻发现程序停，反而会在启动新节点时才报错。
+所以：**Master 挂了，已经连上的节点照样跑，但新来的连不上。** 中途 `roscore` 意外退出，不会立刻发现程序停，反而会在启动新节点时才报错。
 
 ### 2.4 一次话题通信的六步
 
@@ -431,7 +429,7 @@ int main(int argc, char** argv) {
 三个坑：
 
 1. `ros::init` 必须最先。init 之后才能造 `NodeHandle`；漏了它，节点名和参数都认不出来。
-2. `advertise` / `subscribe` 第二个参数是**队列长度**。发送比接收快，队列满了就丢旧数据；这是「我发了但对方漏了」的头号原因。
+2. `advertise` / `subscribe` 第二个参数是**队列长度**。发送比接收快，队列满了就丢旧数据
 3. **回调里别做耗时操作**。回调跑在 `spin` 的线程里，卡住就把后面的消息全堵住了。重活（跑个神经网络、存个图）丢给别的节点。
 
 以及小乌龟里的例子：`/turtle1/cmd_vel（geometry_msgs/Twist）`—— 键盘节点发布，乌龟节点订阅
