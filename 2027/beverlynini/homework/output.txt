@@ -1,0 +1,17 @@
+==== 系统时间 ====
+Tue Oct 20 05:34:04 PM CST 2026
+
+==== 最近10条命令 ====
+vim script.sh
+chmod +x script.sh
+./script.sh
+cat output.txt
+vim script.sh 
+rm output.txt
+.script.sh
+./script.sh
+cat output.txt
+history -w
+
+==== 笔记字数 ====
+366 ../note/10.17note.md
