@@ -1,0 +1,12 @@
+2026年 10月 18日 星期日 14:49:16 CST
+ls --help
+ls
+cd python-/
+ls
+cat 抽牌概率小工具.py 
+date
+cd ~
+ls
+echo $(date)>>1.txt 
+cat 1.txt 
+74 ../notes/first_lesson.md
