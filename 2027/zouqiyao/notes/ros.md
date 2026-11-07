@@ -768,3 +768,66 @@ int main(int argc ,char** argv)
 }
 ```
 
+#### TF 坐标系统
+1. 用来描述 任意两个坐标系之间的位置关系 
+2. 以TF 树来保存两n个坐标系之间的 位置关系
+3. 一个有趣的小例子 roslaunch turtle_tf turtle_tf_demo.launch 
+4. 这个小例子是如何 实现的呢 可以用 rosrun tf view_frames 这个命令 来生成pdf 到当前文件夹 显示 tf树
+5. rosrun tf tf_echo turtle1 turtle2  查看 两个坐标系的坐标变换 包含Translation Rotation
+6. Rotation：Quaternion 四元数 RPY坐标系变换
+7. T turtle1_turrle2 = T turtle1_world * T turtle2_world
+8. 位姿: tf::Transform   这里记录了一个 矩阵相对于另外一个矩阵的 平移和旋转关系 比如 T turtle1_world 在代码里就是一个 tf::Transform 
+9. tf::StampTransform 又是什么呢  是一个 tf::Transform 加上 两个坐标系的名字 和一个时间辍
+10. tf:: 这里面记录的是 两个坐标系之间的关系
+11. 那坐标系本身呢? 被记录在 geometry_msgs/Pose 这种数据结构中 
+12. 就是....tf 是一棵树 每一个节点都是一个绝对的坐标系  每一个边都是一个位姿记录了两个坐标系之间的变换关系
+13. tf::Transform 和 tf::StampedTransform 描述的都是边....
+
+14. broadcaster 的实现
+```cpp
+#include <ros/ros.h>
+#include <tf/transform_broadcaster.h>
+#include <turtlesim/Pose.h>
+std::string turtle_name;
+void poseCallback(const turtlesim::PoseConstPtr &msg)
+{
+    static tf::TransformBroadcaster br;
+    tf::Transform transform;//这个是一个坐标变换矩阵
+    transform.setOrigin(tf::Vector3(msg->x,msg->y,0.0)); //设置平移关系
+
+    tf::Quaternion q; //设置一个四元数
+    q.setRPY(0,0,msg->theta); //解算出这个四元数
+
+    transform.setRotation(q); //将这个四元树加到 transform 里面来
+
+    br.sendTransform(tf::StampedTransform(transform,ros::Time::now(),"world",turtle_name)); //里面的StampTransform 函数是生成了一个 广播message
+                                                       //message 里 分别有 transform旋转矩阵  ros::Time::now()当前时间辍  俩个坐标的名字
+                                                       //表示 当前两 坐标之间的转换关系
+    
+}
+int main(int argc,char ** argv)
+{
+    ros::init(argc,argv,"my_tf_braodcaster");
+
+    if(argc !=2)
+    {
+        ROS_ERROR("need turtle name as argument");
+        return -1;
+    }
+
+    turtle_name = argv[1];
+
+    ros::NodeHandle n;
+    ros::Subscriber sub = n.subscribe(turtle_name+"/pose",10,poseCallback);
+
+    ros::spin();
+    return 0;
+}
+```
+#### ROS 里的节点名重映射 
+1. 为啥？ 一个程序要运行两次  产生两个不同节点 
+2. 但是你会发现 程序里面的节点名称是写死的 新来的节点就会将旧的节点踢下去
+3. 所以在运行同一个程序的时候 我要给它制定节点名称
+4. rosrun learning_tf turtle_tf_broadcaster __name:=turtle2_tf_broadcaster /turtle2 
+5. __name:= 是自定义节点名的意思
+6. /turtle2 是通过argv 传入程序的string 
