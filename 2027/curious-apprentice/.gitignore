@@ -1,0 +1,13 @@
+
+.env
+*.pem
+*.key
+
+*.log
+build/
+
+*.swp
+*~
+
+*.tmp
+tmp/
