@@ -664,3 +664,107 @@ int main(int argc, char **argv)
     return 0;
 }
 ```
+
+
+
+
+
+   #### 定制你的个人的消息库!
+   1. 定义msg 文件 Person.msg
+   ```
+	 string name 
+	 uint8 age
+	 uint8 sex
+
+	 uint8 unknown = 0
+	 uint8 male = 1
+	 uint8 female = 2
+   ``` 
+   2. 这是 msg 的原始数据 ros 会将它编译成 c++ 的 .h 文件
+   ```cpp  Person.h
+	struct
+	{
+		string name;
+		unsigned int age;
+		unsigned int sex;
+
+		enum{
+			unknown = 0,
+			male,
+			female
+		}
+	}
+   ```
+   3. 在package.xml 里面声明功能包依赖
+   <build_depend>message_generation</build_depend>
+   <exec_depend>message_runtime</exec_depend>
+
+   4. 在CMakeLists.txt添加编译选项
+   find_package( .... message_generation) //拿到生成工具
+   add_msg_files(FILES Person.msg)  //登记 Person.msg 告诉generation 我这个文件要转化成 .h
+   generate_messages(DEPENDENCIES std_msgs) // 开始转化命令 DEPENDENCIES std_msgs
+										    // 的意思是 如果我的msg 里用到了 std_msgs 库里面的类型 确保这个类型已经被转化好了
+
+   catkin_package(.... message_runtime)  //对外声明 依赖我这个包的其他包 也要依赖message_runtime 这个库链接
+
+
+ #### Parameter
+	1. Master 会 有一个全局的参数 列表
+	2. 这个列表所有节点都可以看到
+
+	```cpp
+	应用ros 命令
+	rosparam list //列出当前参数
+	rosparam get /param_key               //列出名为param_key 的参数的值
+	rosparam set /param_ket n             //修改这个param_key 的值
+	rosparam dump param.yaml              // 将当前的参数列表 打包成一个 param.yaml 放在主文件目录下   .yaml 文件格式是 /param_key + parameter value
+	rosparam delet /param_key             //删除某个参数
+	rosparam load param.yaml              //加载这个文件进入 Master
+    ```
+
+ #### 在程序里面调用Parameter 
+ ```cpp
+ #include<ros/ros.h>
+#include<std_srvs/Empty.h>
+int main(int argc ,char** argv)
+{
+    ros::init(argc,argv,"Change_param");
+
+    ros::NodeHandle n;
+
+    int red,green,blue;
+    ros::param::get("/turtlesim/background_r",red);
+    ros::param::get("/turtlesim/background_g",green);
+    ros::param::get("/turtlesim/background_b",blue);
+
+    ROS_INFO_STREAM("r:"<<red<<" g:"<<green<<" b:"<<blue);
+
+    enum{
+        r = 255,
+        g = 255,
+        b = 255
+    };
+    ros::param::set("/turtlesim/background_r",r);
+    ros::param::set("/turtlesim/background_g",g);
+    ros::param::set("/turtlesim/background_b",b);
+
+    ROS_INFO("SET R:%d  G:%d  B:%d",r,g,b );
+
+    ros::param::get("/turtlesim/background_r",red);
+    ros::param::get("/turtlesim/background_g",green);
+    ros::param::get("/turtlesim/background_b",blue);
+
+    ROS_INFO_STREAM("r:"<<red<<" g:"<<green<<" b:"<<blue);
+
+    ros::service::waitForService("/clear");
+    
+    ros::ServiceClient pub_change = n.serviceClient<std_srvs::Empty>("/clear");
+
+    std_srvs::Empty srv;
+
+    pub_change.call(srv);
+
+    ROS_INFO("OK");
+}
+```
+
