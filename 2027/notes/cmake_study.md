@@ -408,6 +408,8 @@ int main(int argc, char **argv)
 
  `find_package(catkin REQUIRED COMPONENTS roscpp rospy std_msgs)`
 
+ (或者在创建包时直接添加这些包 ： catkin_create_pkg topic_pkg roscpp std_msgs)
+
 2. 在文件末尾加上：
 ```cpp
 add_executable(hello_node src/hello_node.cpp)
