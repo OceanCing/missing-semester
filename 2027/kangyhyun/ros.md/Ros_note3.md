@@ -220,7 +220,7 @@ rostopic hz /joint_states
 
 正常约为：
 
-```text
+```
 average rate: 50.000
 ```
 
@@ -235,7 +235,7 @@ rosservice call /gazebo/get_model_state \
 
 返回中重点看：
 
-```text
+```
 pose.position.x
 pose.position.y
 pose.position.z
@@ -261,7 +261,7 @@ rosservice call /gazebo/get_physics_properties
 
 重点看：
 
-```text
+```
 pause: False
 ```
 
@@ -276,7 +276,7 @@ rosservice list | grep controller_manager
 
 正常应看到：
 
-```text
+```
 /controller_manager/list_controller_types
 /controller_manager/list_controllers
 /controller_manager/load_controller
