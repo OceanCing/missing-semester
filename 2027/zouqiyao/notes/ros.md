@@ -831,3 +831,217 @@ int main(int argc,char ** argv)
 4. rosrun learning_tf turtle_tf_broadcaster __name:=turtle2_tf_broadcaster /turtle2 
 5. __name:= 是自定义节点名的意思
 6. /turtle2 是通过argv 传入程序的string 
+
+#### launch 文件
+1. 我们要启动一个项目要手动跑很多个节点
+2. 我们可以将启动节点的命令放在一个脚本里面 让我们一次性就可以启动所有需要的节点
+3. launch 文件的写法
+```xml
+<launch>
+	<!-- pkg功能包  type 可执行文件  name 节点运行时的名称 args给main()传参-->
+	<node pkg="turtlesim" name="sim1" type="turtlesim_node" args="turtle1"/>
+	<!--设置Master parameter 变量 单个变量 name参数名 value参数值-->
+	<param name="output_frame" value="odom"/>
+	<!--加载参数文件中的多个参数-->
+	<rosparam file="params.yaml" command="load" ns="params"/>    //在ROS 中参数是被分层管理的 ns就是namespace 的意思 将params.yaml里面的参数加载到 params 这个namespace 下 以防出现全局中名称相同的问题
+	
+	<!--launch 内部的局部变量，仅限于launch文件内部-->
+	<arg name="arg-name" default="arg-value"/>
+
+	<param name="output_frame" value="$(arg arg-name)"/>      //记得加arg 前缀
+
+	<!--重映射   from:原来的名字  to:映射之后的名字-->
+	<remap from="/turtlebot/cmd_vel" to="/cmd_vel"/>     // 换 Topic 和 Service 的名字
+
+	<!--包含其他launch 文件 类似于C语言的include-->
+	<include file="$(dirname)/other.launch"/>           //注意$(dirname) 是当前launch 文件的路径
+
+	类似的常见内置替换
+
+    $(find pkg_name)：找到某个 ROS 包的路径
+
+    $(dirname)：当前 launch 文件所在目录
+
+    $(arg xxx)：引用你声明的 arg
+
+    $(env VAR)：取环境变量
+	
+</launch>
+
+<launch>
+    <param name="/turtle_number"   value="2"/>
+
+    <node pkg="turtlesim" type="turtlesim_node" name="turtlesim_node">
+        <param name="turtle_name1"   value="Tom"/>                           //这里param 放在node里面原因是 这个参数是 在这个节点namespace 下的 
+	 //    /tutrlesim_node/turtle_name1    参数上传到 Master是有命名空间的
+	 //    所以在Parameter 里面看到对 /gruop/name  就是 /命名空间/参数名字
+        <param name="turtle_name2"   value="Jerry"/>
+
+        <rosparam file="$(find learning_launch)/config/param.yaml" command="load"/>
+    </node>
+
+    <node pkg="turtlesim" type="turtle_teleop_key" name="turtle_teleop_key" output="screen"/>
+
+</launch>
+```
+
+4. 启动一个 launch 文件： roslaunch 包名字 文件名.launch
+
+### ros中的 可视化工具
+1. rqt
+```
+rqt_graph  //查看节点 话题连接图
+rqt_console  //可视化日志信息 将INFO ERROR WARNING 
+rqt_plot  //绘制数据曲线 工具
+```
+
+### ros_controller ！
+1. ros 到底是如何对虚拟机器人或者是真实的机器人进行控制的呢?
+2. 首先有两个最主要的东西 第一个是 Controller Manager   一个是 hardware_interface:RobotHW
+3. 首先hardware_interface:RobotHW 就是一个 现实世界（仿真世界）机器人 的虚拟化! 什么意思呢: ros 维护了一个虚拟的"机器人"在电脑里面  
+4. 真实的机器人通过接口不断的将自己的状态更新到这个虚拟的“机器人”上  我们的controller 就可以通过查看这个虚拟的“机器人”的状态来得知  真实的机器人的状态 
+5. 我们还可以对这个虚拟的机器人下达指令 然后RW 就会向真正的机器人下达真实的指令!
+6. 好了那么控制器是一个什么东西呢? 就是一个给机器人下达指令的模块  它负责接受机器人某个部位的当前的位置信息  然后通过算法得出机器人下一步需要怎么做  将这个命令写入RW 
+7. 那有如此之多的 controller 我应该如何统一管理呢?
+8. ros 有一个非常聪明的办法
+9. 将每一个contorller 都写成一个类 我们自己去写这个类里面的函数 要读取什么数据 要发送什么命令
+10. 但是我们写的东西也就仅仅是一个类啊 它要发挥作用 必须要实例化
+11. Controller Manager 就是干这个活的 每一个我们写的类都在它的手里 由它来进行实例化这个类并且执行里面的成员函数
+12. 我们写好的类 要告诉Controller Manager 可以用了  就要用到 Plugin 告诉Manager 它可以实例化并且调用了
+13. 那Manager 在实例化了一个类以后会干什么呢 
+14. 首先 init() 拿到 一个RW 的句柄 jiont_   然后starting() 开始干活  update() 以一个很高的频率来不断的获得状态发送指令
+
+#### 如何写一个自己的 ros_controller 
+1. 我们的目的是写一个插件  插件是什么呢  就是我们要生成一个 .so 文件作为一个动态库  在control Manger 运行的时候动态加载这个插件
+2.  建包：用命令 catkin_create_pkg 我的控制器名 roscpp controller_interface pluginlib hardware_interface 建个文件夹。
+
+    写代码：把刚才的 .h 和 .cpp 塞进 include 和 src 文件夹，代码最后别忘了加 PLUGINLIB_EXPORT_CLASS 宏。
+
+    写身份卡：新建一个 controller_plugins.xml，把你的类名、路径写进去
+
+    写说明书：修改 CMakeLists.txt（加 add_library 和 install）和 package.xml（加 <export>）。
+
+    编译：运行 catkin_make，生成 .so 文件。
+
+    使用：在控制器的启动配置（YAML 文件）里，写上你的插件名字。Controller Manager 就会自己去找它、加载它、跑起来！
+```h
+#pragma once
+#include <controller_interface/controller.h>
+#include <hardware_interface/joint_command_interface.h>
+#include <vector> // 别忘了引入 vector 库
+
+namespace controller_ns {
+
+class PositionController : public controller_interface::Controller<hardware_interface::EffortJointInterface>
+{
+public:
+  bool init(hardware_interface::EffortJointInterface* hw, ros::NodeHandle &n) override;
+  void update(const ros::Time& time, const ros::Duration& period) override;
+  void starting(const ros::Time& time) override;
+  void stopping(const ros::Time& time) override;
+
+private:
+  // hardware_interface::JointHandle joint_;  // 原来只能管一个
+  
+  std::vector<hardware_interface::JointHandle> joints_; // 现在改成一个数组（容器），能管多个
+};
+} // namespace controller_ns
+````
+```cpp
+#include <controller_interface/controller.h>
+#include <hardware_interface/joint_command_interface.h>
+#include <pluginlib/class_list_macros.h>
+
+namespace controller_ns{
+
+class PositionController : public controller_interface::Controller<hardware_interface::EffortJointInterface>
+//我定义了一个类 controller_ns:: PositionController
+//它共有继承了 controller_interface 包 里面的 Controller 基类
+//这个基类有几个 vitrual 函数 init() starting()  update() 等
+//我这个类会将这些 函数 reride 
+//但是 Manager 在调用我的类的时候就会直接调用 基类Controller 里面的函数 来操纵我的类
+//<hardware_interface::EffortJointInterface> 是因为Contorller是一个模板
+//传入的template<class T> 主要决定了joint_.setCommand() 发送给谁
+{
+public:
+  bool init(hardware_interface::EffortJointInterface* hw, ros::NodeHandle &n)
+  // hardware_interface::EffortJointInterface* 是hardware_interface 包里面的 Effort 接口
+  // Effort 接口 hw 里面的 .serCommand() 函数只能给Hardware_interface:RW 这个软件层发送 Effort 也就是力矩指令
+  // Manager在实例化这个类的时候发现 基类Controller 是 <hardware_interface::EffortJointInterface>类型  所以向RW 申请了一个 Effort 接口   我们可以通过这个接口来读取 不同的数据 不过只能发送一种命令 Effort 命令
+  // 同时Manager 也给了我们一个 ros:: NodeHandle &n 我们可以通过它来跟 Master 对话 拿到Parameter里面的 数据
+  //Paremeter 里面存着 Hardware_interface:RW 提供的虚拟电机名字
+  //注意  这个名字 比如下面的 string my_joint 是这个电机唯一的一个ID 所以这个joint 还是很严格的
+
+  //EffortJointInterface 其实里面是一个map 它的作用是 你给我一个名字 我给你 这个名字电机的句柄
+/* 
+  class EffortJointInterface {
+private:
+    // 这就是它的核心！一个字典（Map）
+    // 左边是电机的名字（字符串），右边是那个电机的句柄（遥控器）
+    std::map<std::string, JointHandle> handles_; 
+
+public:
+    // 注册电机：建仓库的时候，把电机放进去
+    void registerHandle(const JointHandle& handle) {
+        handles_[handle.getName()] = handle;
+    }
+
+    // 拿电机：你报名字，我给你遥控器
+    JointHandle getHandle(const std::string& name) {
+        // 如果找不到名字，这里会抛出异常报错
+        return handles_.at(name); 
+    }
+};
+*/
+  {
+    // get joint name from the parameter server
+    std::string my_joint;
+    if (!n.getParam("joint", my_joint))   //这里在向 Master 请求 Parameter 里面的参数 "joint"
+	{
+      ROS_ERROR("Could not find joint name");
+      return false;
+    }
+
+    // get the joint object to use in the realtime loop
+    joint_ = hw->getHandle(my_joint);  // 这里提供了一个句柄 这个句柄就真正的连接着hardware_interface：RW 里面的电机了
+									   // 我们可以通过 这个句柄给电机发送指令 和请求信息了
+    return true;
+  }
+
+  void update(const ros::Time& time, const ros::Duration& period)
+  // update 是一个 在这个类里面reride 基类Controller 里面的update()函数
+  // Manager通过 调用 基类Contorller来调用 我们这个类
+  //update 函数是核心函数  Manager 会不断调用这个函数
+  //这个函数 的功能就是 收到 hardware_interface 的信息 计算出命令 然后setCommand 给joint_句柄 发送给机器人
+  // const ros::Time &time 这个是ros系统的绝对时间戳 这个类记录着 ros 系统运行的时间
+  // const ros::Duratino &period 这个记录了跟上一次update() 运行的时间差 
+  // period 的用处 是 在这update() 受到了一个 位置    下一个update() 我又受到了一个位置 那么两个位置相减 / period 就是速度
+  // 而且不受update() 频率的影响 都可以稳定的求出 两次update()之间的平均速度
+  {
+    double error = setpoint_ - joint_.getPosition();  //计算出error
+    joint_.setCommand(error*gain_); //简单 P 命令 
+  }
+
+  void starting(const ros::Time& time) { }   // 这个是
+  void stopping(const ros::Time& time) { }
+
+private:
+  hardware_interface::JointHandle joint_;
+  static const double gain_ = 1.25;
+  static const double setpoint_ = 3.00;
+};
+PLUGINLIB_DECLARE_CLASS(package_name, PositionController, controller_ns::PositionController, controller_interface::ControllerBase);  //这里是向 Manager 声明 我有一个package_name/PositionController 类已经打包成为 一个 .so 文件了     并且我用的接口是ControllerBase 你可以直接调用这个类里面 reride 的 ControllerBase 函数 来调用这个类
+// 跟Manager 声明的唯一 ID 就是 package_name/PositionController 
+// 那么ns 这个命名空间有什么用呢? 
+// 就是 如果你在同一个包里 写了两个PositionController 那么就要用 namespace 来区分了 
+// Manager 会读取 controller_plugins.xml 
+// 里面的 
+         <class name="simple_chassis_controller/SimpleChassisController"
+         type="controller_ns::PositionContorller"
+         base_class_type="controller_interface::ControllerBase">     
+		 </class>
+// type 这里就可以区分两个不同的类了
+//并且注意 写完 PLUGINLIB_DECLARE_CLASS 之后 要在 controller_plugins.xml 里面声明 <class> </class> 让Manager 找到
+}//namespace
+
+```
