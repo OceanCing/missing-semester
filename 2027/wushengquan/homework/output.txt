@@ -1,0 +1,16 @@
+
+2026年 10月 20日 星期二 21:39:56 CST
+
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+# 重新加载环境
+source ~/.bashrc
+# 安装最新 LTS 版本 Node
+nvm install --lts
+nvm use --lts
+npm install -g @deepseek-ai/dsh
+npm install -g --allow-scripts=@deepseek-ai/dsh-subprocess-local,koffi,node-pty,@google/genai,protobufjs @deepseek-ai/dsh
+dsh --version
+dsh web
+
+5322
+
