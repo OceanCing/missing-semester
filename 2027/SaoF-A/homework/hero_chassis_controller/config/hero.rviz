@@ -1,0 +1,45 @@
+Panels:
+  - Class: rviz/Displays
+    Name: Displays
+Visualization Manager:
+  Class: ""
+  Global Options:
+    Background Color: 48; 48; 48
+    Fixed Frame: odom
+    Frame Rate: 30
+  Displays:
+    - Class: rviz/Grid
+      Name: Grid
+      Enabled: true
+      Plane Cell Count: 30
+      Cell Size: 1
+    - Class: rviz/RobotModel
+      Name: Hero
+      Enabled: true
+      Robot Description: robot_description
+      Visual Enabled: true
+      Collision Enabled: false
+      TF Prefix: ""
+    - Class: rviz/TF
+      Name: TF
+      Enabled: true
+      Show Axes: true
+      Show Arrows: true
+      Show Names: true
+    - Class: rviz/Odometry
+      Name: Wheel odometry
+      Enabled: true
+      Topic: /odom
+      Keep: 100
+      Shape: Arrow
+  Views:
+    Current:
+      Class: rviz/Orbit
+      Distance: 5
+      Pitch: 0.65
+      Yaw: 0.8
+      Target Frame: base_link
+      Focal Point:
+        X: 0
+        Y: 0
+        Z: 0

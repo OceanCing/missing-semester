@@ -1,0 +1,23 @@
+<launch>
+  <arg name="gui" default="true"/>
+  <arg name="paused" default="false"/>
+  <arg name="roller_type" default="realistic"/>
+  <arg name="load_controllers" default="true"/>
+
+  <param name="robot_description"
+         command="$(find xacro)/xacro '$(find hero_chassis_controller)/urdf/hero_standard_control.urdf.xacro' roller_type:=$(arg roller_type)"/>
+
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="gui" value="$(arg gui)"/>
+    <arg name="paused" value="$(arg paused)"/>
+  </include>
+
+  <node name="spawn_hero" pkg="gazebo_ros" type="spawn_model"
+        args="-urdf -param robot_description -model hero -z 0.5" output="screen"/>
+  <node name="robot_state_publisher" pkg="robot_state_publisher"
+        type="robot_state_publisher" output="screen"/>
+
+  <group if="$(arg load_controllers)">
+    <include file="$(find simple_chassis_controller)/launch/load_controller.launch"/>
+  </group>
+</launch>

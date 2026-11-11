@@ -1,0 +1,10 @@
+<launch>
+  <arg name="rviz" default="true"/>
+  <arg name="plot" default="true"/>
+  <arg name="tune" default="true"/>
+  <node if="$(arg rviz)" name="hero_rviz" pkg="rviz" type="rviz"
+        args="-d $(find hero_chassis_controller)/config/hero.rviz"/>
+  <node if="$(arg plot)" name="hero_plot" pkg="rqt_plot" type="rqt_plot"
+        args="/hero_chassis_controller/front_left/state/set_point /hero_chassis_controller/front_left/state/process_value /hero_chassis_controller/front_left/state/error"/>
+  <node if="$(arg tune)" name="hero_tune" pkg="rqt_reconfigure" type="rqt_reconfigure"/>
+</launch>

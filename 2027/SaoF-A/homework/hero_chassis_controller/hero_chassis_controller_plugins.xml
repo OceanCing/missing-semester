@@ -1,0 +1,6 @@
+<library path="lib/libhero_chassis_controller">
+  <class name="hero_chassis_controller/ChassisController" type="hero_chassis_controller::ChassisController"
+         base_class_type="controller_interface::ControllerBase">
+    <description>Mecanum velocity control through four effort joint PID loops.</description>
+  </class>
+</library>

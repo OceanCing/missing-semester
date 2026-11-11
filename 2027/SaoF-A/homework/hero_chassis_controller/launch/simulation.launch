@@ -1,0 +1,15 @@
+<launch>
+  <arg name="gui" default="true"/>
+  <arg name="cmd_vel_mode" default="base_link"/>
+  <arg name="world_frame" default="odom"/>
+  <include file="$(find hero_chassis_controller)/launch/required_reference.launch">
+    <arg name="gui" value="$(arg gui)"/>
+    <arg name="load_controllers" value="false"/>
+    <arg name="roller_type" value="realistic"/>
+  </include>
+  <rosparam command="load" file="$(find hero_chassis_controller)/config/controllers.yaml"/>
+  <param name="hero_chassis_controller/cmd_vel_mode" value="$(arg cmd_vel_mode)"/>
+  <param name="hero_chassis_controller/world_frame" value="$(arg world_frame)"/>
+  <node name="controller_spawner" pkg="controller_manager" type="spawner"
+        args="joint_state_controller hero_chassis_controller" output="screen"/>
+</launch>
