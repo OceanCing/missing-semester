@@ -1022,8 +1022,8 @@ public:
     joint_.setCommand(error*gain_); //简单 P 命令 
   }
 
-  void starting(const ros::Time& time) { }   // 这个是
-  void stopping(const ros::Time& time) { }
+  void starting(const ros::Time& time) { }   // 这个是有点像构造函数
+  void stopping(const ros::Time& time) { }   // 这个有点像析构函数
 
 private:
   hardware_interface::JointHandle joint_;
@@ -1045,3 +1045,37 @@ PLUGINLIB_DECLARE_CLASS(package_name, PositionController, controller_ns::Positio
 }//namespace
 
 ```
+
+
+### 从cotroller 到 Gazebo 机器人真正动起来 
+1. 每一个 joint 不只有一个控制句柄 它可以有 力矩控制EffortJointInterface  速度控制VelocityJointInterface
+2. EffortJointInterface 是一个 什么东西 它里面存了 “joint 名字” -> "joint 的这个类型的句柄" 一个map 
+3. 就是将所有joint 的Effort 句柄都收集起来 当你写一个 controller并且要通过 Effort来控制的时候 就到EffortJointInterface 里找句柄
+
+URDF 文件  →  robot_description 参数  →  硬件层建句柄池 (EffortJointInterFace 等)
+                                              ↓
+controllers.yaml  →  参数服务器  →  控制器 init() 读名字  →  getHandle(名字)  →  拿到句柄
+
+4. xacro 将 URDF(物理描述机器人) 转换 成一个 xml 文件  这个文件运行产生了一个参数 robot_descroiption
+5. robot_descroiption 是gazebo 或者现实机器人 对机器人结构的物理定义(零件结构的物理定义)  它放在 Master 里
+6. 上述 URDF---->robot_description 是将一个 物理/仿真 机器人 参数化  塞进了 master 里面
+
+7. Gazebo 读取robot_description 建立仿真模型  
+8. librm_robot_hw_sim.so 这个是将 Gazebo 世界里的接口 和 ros_control 的接口连起来 让ros_control 的接口可以动Gazebo世界里的机器人
+8. librm_robot_hw_sim.so 生成的 接口 以 "joint_name"--->"joint_interface" 的形式放在 EffortJointInterFace 句柄池里面
+9. EffortJointInterFace 这个句柄池(也就是一个map) 在 hardware_interface 这个包里被定义 (所以这就是我们的代码为啥要inclue<hardware_interface/EffortJointInterFace>)
+10. 但是运行起来的 实例EffortJointInterFace 放在hardware_interface 层里面
+11. controller.yaml 是我们自己写的 告诉 Master 我这个类“controller” 要用那些关节
+12. 然后在代码里面 就可以调用 getParam() 来得到关节的名字 进而在EffortJointInterFace里面拿到句柄
+
+
+### 对于update() 里面进行数据订阅
+1. 在我们向Master 注册一个subscriber 的时候 后台就已经有了一个线程 在盯着/cmd_vel 这个topic 了
+2. 那为啥需要spin()?
+3. 如果我们的主函数结束了 这个线程也会被杀死 所以我们需要一个死循环 防止主函数结束
+4. 在update() 里面就不需要 因为... 这个控制器class是一直在的 所以...后台的监听线程也就一直在
+5. 为什么不可以写 spinOnce() 因为 update() 被调用得 非常快 一下子cpu 就满了
+6. 所以我们要做的事情就是 用回调函数 将目标速度 填入类的私有成员里面
+7. 让控制器读取私有成员 根据这个私有成员进行计算 要给轮子的力矩
+
+8. 必须加锁 因为.. 同时会有两个线程需要同一个数据  第一个是update()要读  第二个是回调要写 所以一定得第一个做好了第二个才可以做
