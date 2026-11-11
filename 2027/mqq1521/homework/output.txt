@@ -1,0 +1,13 @@
+系统时间
+2026年 10月 20日 星期二 21:06:42 CST
+  292  cd homework
+  293  touch 1.sh
+  294  vim 1.sh
+  295  homework.sh
+  296  1.sh
+  297  ./1.sh
+  298  chmod -x 1.sh
+  299  ./1.sh
+  300  chmod +x 1.sh
+  301  ./1.sh
+1305 ../notes/note.md
