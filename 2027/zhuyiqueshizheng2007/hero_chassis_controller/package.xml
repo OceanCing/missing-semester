@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>hero_chassis_controller</name>
+  <version>0.1.0</version>
+  <description>RoboMaster Hero Chassis Controller.</description>
+  <maintainer email="lfj197559082@qq.com">zhuyiqueshizheng2007</maintainer>
+  <license>BSD</license>
+  <author email="lfj197559082@qq.com">zhuyiqueshizheng2007</author>
+
+  <!-- buildtool_depend: dependencies of the build process -->
+  <buildtool_depend>catkin</buildtool_depend>
+  <!-- build_depend: dependencies only used in source files -->
+  <build_depend>boost</build_depend>
+  <!-- depend: build, export, and execution dependency -->
+  <depend>eigen</depend>
+  <depend>roscpp</depend>
+  <depend>control_toolbox</depend>
+  <depend>pluginlib</depend>
+  <depend>hardware_interface</depend>
+  <depend>geometry_msgs</depend>
+  <depend>nav_msgs</depend>
+  <depend>tf</depend>
+  <depend>controller_interface</depend>
+  <depend>dynamic_reconfigure</depend>
+  <export>
+    <controller_interface plugin="${prefix}/hero_chassis_controller_plugins.xml"/>
+  </export>
+</package>

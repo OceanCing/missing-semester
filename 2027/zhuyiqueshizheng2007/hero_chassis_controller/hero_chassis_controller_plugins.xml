@@ -1,0 +1,12 @@
+<library path="lib/libhero_chassis_controller">
+
+  <class name="hero_chassis_controller/HeroChassisController"
+         type="hero_chassis_controller::HeroChassisController"
+         base_class_type="controller_interface::ControllerBase">
+    <description>
+      The Hero_ChassisController is RoboMaster standard robot Chassis controller. It expects a EffortJointInterface
+      type of hardware interface.
+    </description>
+  </class>
+
+</library>
