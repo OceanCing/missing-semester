@@ -1,0 +1,16 @@
+2026年 10月 20日 星期二 13:15:06 CST
+接下来要输出的是shell的前10条指令
+ls
+cd notes
+ls
+cd ..
+cd homework
+ls
+vi output
+vi output.txt
+./homework1.sh 
+vim output.txt 
+接下来要输出的是note.md的字数
+4877
+接下来要输出的是c++_note.md的字数
+7817
