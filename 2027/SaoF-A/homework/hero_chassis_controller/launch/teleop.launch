@@ -1,0 +1,9 @@
+<launch>
+  <node name="keyboard" pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py"
+        output="screen" launch-prefix="xterm -e">
+    <param name="speed" value="0.2"/>
+    <param name="turn" value="0.5"/>
+    <param name="repeat_rate" value="20.0"/>
+    <param name="key_timeout" value="0.2"/>
+  </node>
+</launch>

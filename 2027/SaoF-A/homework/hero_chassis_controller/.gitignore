@@ -1,0 +1,16 @@
+# Local build products and editor settings
+/build/
+/devel/
+/logs/
+/cmake-build-*/
+/.idea/
+/.run/
+__pycache__/
+*.pyc
+*.bag
+*.swp
+# Local working instructions and intermediate records
+[Aa][Gg][Ee][Nn][Tt][Ss].md
+*.agent.md
+/work/
+/outputs/

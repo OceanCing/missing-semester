@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>hero_chassis_controller</name>
+  <version>0.1.0</version>
+  <description>Mecanum effort controller with wheel velocity PID and odometry.</description>
+  <maintainer email="aaasaofurry@gmail.com">SaoF-A</maintainer>
+  <license>BSD-3-Clause</license>
+  <buildtool_depend>catkin</buildtool_depend>
+  <depend>controller_interface</depend>
+  <depend>control_toolbox</depend>
+  <depend>control_msgs</depend>
+  <depend>dynamic_reconfigure</depend>
+  <depend>geometry_msgs</depend>
+  <depend>hardware_interface</depend>
+  <depend>nav_msgs</depend>
+  <depend>pluginlib</depend>
+  <depend>realtime_tools</depend>
+  <depend>roscpp</depend>
+  <depend>tf</depend>
+  <depend>tf2_msgs</depend>
+  <exec_depend>rospy</exec_depend>
+  <exec_depend>controller_manager_msgs</exec_depend>
+  <exec_depend>gazebo_msgs</exec_depend>
+  <exec_depend>teleop_twist_keyboard</exec_depend>
+  <exec_depend>rqt_plot</exec_depend>
+  <exec_depend>rqt_reconfigure</exec_depend>
+  <exec_depend>rviz</exec_depend>
+  <exec_depend>xterm</exec_depend>
+  <exec_depend>python3-matplotlib</exec_depend>
+  <exec_depend>controller_manager</exec_depend>
+  <exec_depend>gazebo_ros</exec_depend>
+  <exec_depend>gazebo_ros_control</exec_depend>
+  <exec_depend>joint_state_controller</exec_depend>
+  <exec_depend>rm_description_for_task</exec_depend>
+  <exec_depend>robot_state_publisher</exec_depend>
+  <exec_depend>simple_chassis_controller</exec_depend>
+  <exec_depend>xacro</exec_depend>
+  <export>
+    <controller_interface plugin="${prefix}/hero_chassis_controller_plugins.xml"/>
+  </export>
+</package>

@@ -1,0 +1,30 @@
+joint_state_controller:
+  type: joint_state_controller/JointStateController
+  publish_rate: 50
+hero_chassis_controller:
+  type: hero_chassis_controller/ChassisController
+  joints: [left_front_wheel_joint, right_front_wheel_joint, left_back_wheel_joint, right_back_wheel_joint]
+  wheel_signs: [1.0, 1.0, 1.0, 1.0]
+  wheel_radius: 0.07625
+  wheel_base: 0.4
+  wheel_track: 0.4
+  max_wheel_speed: 40.0
+  cmd_vel_mode: base_link
+  world_frame: odom
+  odom_frame: odom
+  base_frame: base_link
+  cmd_vel_timeout: 0.3
+  max_acceleration_x: 0.5
+  max_acceleration_y: 0.5
+  max_acceleration_wz: 1.0
+  pid:
+    front_left: &wheel_pid
+      p: 0.8
+      i: 0.1
+      d: 0.001
+      i_clamp: 0.5
+      antiwindup: true
+      effort_limit: 5.0
+    front_right: *wheel_pid
+    back_left: *wheel_pid
+    back_right: *wheel_pid
