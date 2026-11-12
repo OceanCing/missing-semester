@@ -1,0 +1,9 @@
+<launch>
+  <!-- 把控制器配置加载到参数服务器的全局命名空间 -->
+  <rosparam file="$(find hero_chassis_controller)/config/controllers.yaml" command="load"/>
+
+  <!-- load + start，名字必须与 controllers.yaml 里 controller: 下的键一致 -->
+  <node name="controller_spawner" pkg="controller_manager" type="spawner"
+        respawn="false" output="screen"
+        args="controller/hero_chassis_controller controller/joint_state_controller"/>
+</launch>

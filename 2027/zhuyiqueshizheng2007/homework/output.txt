@@ -1,0 +1,15 @@
+系统时间：
+2026年 10月 19日 星期一 23:41:46 CST
+最近10条命令：
+cd..
+cd ..
+sudo apt install ./FlClash--linux-amd64.deb
+[200~sudo apt install ./FlClash--linux-amd64.deb~sudo apt install ./FlClash--linux-amd64.deb
+sudo apt install ./FlClash--linux-amd64.deb
+ssh -T git@github.com
+ls 
+ls -FlClash--linux-amd64.deb
+ls -al ~/.ssh
+cat ~/.ssh/id_ed25519.pub
+笔记字数：
+230 notes/lesson1.md
