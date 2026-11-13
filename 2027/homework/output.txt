@@ -1,0 +1,18 @@
+===运行脚本的系统时间===
+2026-10-19 22:47:03
+
+===最近使用的10条命令===
+tree
+find note1
+cd
+find note1
+find note1.md
+mv knowledge/note1.md note/missing-semester/2027/notes/note1.md
+cd note/missing-semester/2027/notes/
+cat note1.md first.md 
+cat note1.md >>first.md 
+cat first.md 
+
+===我的笔记字数===
+“362”
+
