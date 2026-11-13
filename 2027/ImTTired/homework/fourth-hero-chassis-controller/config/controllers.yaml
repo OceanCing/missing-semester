@@ -1,0 +1,38 @@
+
+controller:
+  hero_chassis_controller:
+    type: hero_chassis_controller/HeroChassisController
+
+    wheel_radius: 0.07625
+    wheel_track: 0.4
+    wheel_base: 0.4
+
+    front_left_sign: 1.0
+    front_right_sign: 1.0
+    rear_left_sign: 1.0
+    rear_right_sign: 1.0
+
+    max_effort: 2.0
+    max_wheel_speed: 20.0
+    command_timeout: 0.5
+
+    # Task 7: body = /cmd_vel in base_link; world = /cmd_vel in odom.
+    # Mode is read on controller initialization; reload controller to change.
+    velocity_frame_mode: world
+
+    pid:
+      p: 0.5
+      i: 0.0
+      d: 0.0
+      i_clamp: 1.0
+
+    # V0.3 odometry configuration
+    odom_publish_rate: 30.0
+    odom_frame: odom
+    base_frame: base_link
+    publish_tf: true
+
+
+  joint_state_controller:
+    type: joint_state_controller/JointStateController
+    publish_rate: 50

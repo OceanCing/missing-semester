@@ -1,0 +1,10 @@
+<library path="lib/libhero_chassis_controller">
+  <class
+      name="hero_chassis_controller/HeroChassisController"
+      type="hero_chassis_controller::HeroChassisController"
+      base_class_type="controller_interface::ControllerBase">
+    <description>
+      Four-wheel RoboMaster Hero chassis controller.
+    </description>
+  </class>
+</library>
