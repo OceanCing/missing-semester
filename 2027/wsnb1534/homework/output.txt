@@ -1,0 +1,17 @@
+time:
+2026年 10月 20日 星期二 10:49:54 CST
+
+command:
+vim hello.sh 
+cat h.txt 
+claude
+cat h.txt 
+cat output.txt 
+vim hello.sh 
+./hello.sh 
+vim homework1.sh 
+./2027/wsnb1534/homework/homework1.sh
+./homework1.sh 
+
+words: 249
+characters: 1902
