@@ -1,0 +1,17 @@
+系统时间
+2026年 10月 20日 星期二 09:37:35 CST
+
+最近 10 条命令
+  170  vim lession01.md
+  171  vim lesson01.md
+  172  history -a
+  173  ./2027/Mars-per/homework/homework01.sh
+  174  cat 2027/Mars-per/homework/output.txt
+  175  Vim lesson01.md
+  176  vim 2027/Mars-per/notes/lesson01.md
+  177  cd ~/桌面/missing-semester
+  178  history -a
+  179  {   echo "系统时间";   date;   echo;    echo "最近 10 条命令";   history | tail -n 10;   echo;    echo "笔记字数";   wc -m ../notes/lesson01.md; } > output.txt
+
+笔记字数
+5433 ../notes/lesson01.md
