@@ -1,0 +1,15 @@
+======运行时间=======
+2026年 10月 21日 星期三 20:24:31 CST
+======最近使用的十条命令======
+sudo docker run hello-world
+nano --version
+sudo nano /var/snap/docker/current/config/daemon.json
+sudo snap restart docker
+sudo docker run hello-world
+sudo nano /var/snap/docker/current/config/daemon.json
+sudo snap restart docker
+sudo docker run hello-world
+sudo docker system prune
+sudo docker run hello-world
+=====笔记的字数=====
+1875
