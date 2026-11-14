@@ -73,3 +73,4 @@ rviz是ros的可视化工具，能将话题的信息可视化，可以理解为�
 
 ## 12.一旦 `source devel/setup.bash`，PATH 被污染，ros 基础命令直接消失
 老版本bug，改用 catkin build
+

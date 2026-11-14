@@ -35,6 +35,9 @@ WorkSpace --- 自定义的工作空间 （可由catkin_make创建，但有时会
 
     |-- CMakeLists.txt: 编译的基本配置
 
+# 编译文件
+catkin build很好，但每次编译后不会自动刷新shell环境，得重新source
+
 # 功能包的编写
 ## 创建
 可以用ros_create_pkg name <依赖> ...
@@ -105,7 +108,9 @@ pid:
 代码读取参数
 ```C++
 // 读取参数，第一个是yaml里的键名，第二个是变量
-nh.getParam("laser_topic", laser_topic);
+nh.getParam("laser_topic", laser_topic);    //这个读取不了保留旧值
+//或
+image_topic_ = pnh_.param<std::string>("image_topic","/hk_camera/image_raw/");   //这个是保留默认值
 ```
 加载参数
 ```xml
@@ -178,6 +183,8 @@ ROS 中的基本通信机制主要有如下三种实现策略:
   ros::spin();
   ```
 
+### 订阅
+###
   - 订阅方
   ```C++
   void doMsg(const <信息所处的空间>::ConstPtr& msg_p){
@@ -368,6 +375,13 @@ dynamic_reconfigure::Server<smb_highlevel_controller::WarningConfig> server;
     server.setCallback(boost::bind(&reconfigCallBack,_1,_2));
 ...
 ```
+---
+
+catkin_tools
+
+catkin init
+
+---
 
 # 该笔记记录做smb小车仿真遇到的问题和解决
 
